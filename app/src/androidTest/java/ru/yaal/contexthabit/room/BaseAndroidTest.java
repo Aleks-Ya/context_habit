@@ -15,6 +15,7 @@ public abstract class BaseAndroidTest {
     protected ContextDao contextDao;
     protected HabitDao habitDao;
     protected ActionDao actionDao;
+    protected ContextHabitJoinDao contextHabitJoinDao;
     private AppDatabase db;
 
     @Before
@@ -24,6 +25,7 @@ public abstract class BaseAndroidTest {
         contextDao = db.contextDao();
         habitDao = db.habitDao();
         actionDao = db.actionDao();
+        contextHabitJoinDao = db.contextHabitJoinDao();
     }
 
     @After
