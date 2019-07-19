@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import ru.yaal.contexthabit.room.ContextEntity;
-import ru.yaal.contexthabit.room.HabitEntity;
+import ru.yaal.contexthabit.repo.room.ContextEntity;
+import ru.yaal.contexthabit.repo.room.HabitEntity;
 
 import static ru.yaal.contexthabit.MainActivity.HABITS_EXTRA_NAME;
 
@@ -40,7 +40,7 @@ public class ContextAdapter extends RecyclerView.Adapter<ContextAdapter.ContextV
     public void onBindViewHolder(ContextViewHolder holder, int position) {
         ContextEntity context = dataset.get(position);
         holder.view.setText(context.name);
-        List<HabitEntity> habits = MainActivity.database.contextHabitJoinDao().getHabitsForContext(context.id);
+        List<HabitEntity> habits = MainActivity.repository.getHabitsForContext(context);
         holder.view.setOnClickListener(new ContextButtonOnClickListener(habits));
 
     }

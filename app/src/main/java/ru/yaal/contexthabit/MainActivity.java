@@ -7,21 +7,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
-import java.util.List;
-
 import ru.yaal.contexthabit.android.R;
-import ru.yaal.contexthabit.room.AppDatabase;
-import ru.yaal.contexthabit.room.ContextDao;
-import ru.yaal.contexthabit.room.ContextEntity;
-import ru.yaal.contexthabit.room.ContextHabitJoin;
-import ru.yaal.contexthabit.room.ContextHabitJoinDao;
-import ru.yaal.contexthabit.room.HabitDao;
-import ru.yaal.contexthabit.room.HabitEntity;
+import ru.yaal.contexthabit.repo.Repository;
+import ru.yaal.contexthabit.repo.RepositoryImpl;
+import ru.yaal.contexthabit.repo.room.AppDatabase;
+import ru.yaal.contexthabit.repo.room.ContextEntity;
+import ru.yaal.contexthabit.repo.room.HabitEntity;
+
+import static ru.yaal.contexthabit.repo.room.ContextEntity.emptyContext;
+import static ru.yaal.contexthabit.repo.room.EntityBuilder.createContext;
+import static ru.yaal.contexthabit.repo.room.EntityBuilder.createHabit;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     public static final String HABITS_EXTRA_NAME = "habits";
-    public static AppDatabase database;
+    public static Repository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,62 +31,28 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        database = Room.databaseBuilder(this, AppDatabase.class, "context_habit")
+        AppDatabase database = Room.databaseBuilder(
+                this, AppDatabase.class, "context_habit")
                 .allowMainThreadQueries()
                 .build();
 
+        repository = new RepositoryImpl(database.contextDao(), database.habitDao(),
+                database.contextHabitJoinDao());
 
-        ContextEntity context1 = new ContextEntity();
-        context1.id = 1;
-        context1.name = "Want eat";
+        ContextEntity context1 = createContext(1, "Want eat", emptyContext.id);
+        ContextEntity context2 = createContext(2, "Leave home", emptyContext.id);
+        repository.saveContext(context1, context2);
 
-        ContextEntity context2 = new ContextEntity();
-        context2.id = 2;
-        context2.name = "Leave home";
+        HabitEntity habit1 = createHabit(1, "Eat hungry");
+        HabitEntity habit2 = createHabit(2, "Bring water everywhere");
+        HabitEntity habit3 = createHabit(3, "Not eat 1 hour after workout");
+        repository.saveHabit(habit1, habit2, habit3);
 
-        ContextDao contextDao = database.contextDao();
-        contextDao.insert(context1);
-        contextDao.insert(context2);
+        repository.link(context1, habit1);
+        repository.link(context2, habit2);
+        repository.link(context1, habit3);
 
-        HabitEntity habit1 = new HabitEntity();
-        habit1.id = 1;
-        habit1.name = "Eat hungry";
-
-        HabitEntity habit2 = new HabitEntity();
-        habit2.id = 2;
-        habit2.name = "Bring water everywhere";
-
-        HabitEntity habit3 = new HabitEntity();
-        habit3.id = 3;
-        habit3.name = "Not eat 1 hour after workout";
-
-        HabitDao habitDao = database.habitDao();
-        habitDao.insert(habit1, habit2, habit3);
-
-        ContextHabitJoin join1 = new ContextHabitJoin();
-        join1.contextId = context1.id;
-        join1.habitId = habit1.id;
-
-        ContextHabitJoin join2 = new ContextHabitJoin();
-        join2.contextId = context2.id;
-        join2.habitId = habit2.id;
-
-        ContextHabitJoin join3 = new ContextHabitJoin();
-        join3.contextId = context1.id;
-        join3.habitId = habit3.id;
-
-        ContextHabitJoinDao contextHabitJoinDao = database.contextHabitJoinDao();
-        contextHabitJoinDao.insert(join1, join2, join3);
-
-        List<ContextEntity> contexts = contextDao.getAll();
-        RecyclerView.Adapter mAdapter = new ContextAdapter(contexts);
+        RecyclerView.Adapter mAdapter = new ContextAdapter(repository.getAllContexts());
         recyclerView.setAdapter(mAdapter);
     }
-
-//    public void showHabits(View view) {
-//        Intent intent = new Intent(this, HabitsActivity.class);
-//        intent.putExtra(HABITS_EXTRA_NAME, );
-//        startActivity(intent);
-//    }
-
 }

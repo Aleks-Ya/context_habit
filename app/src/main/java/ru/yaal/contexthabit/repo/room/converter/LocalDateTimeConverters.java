@@ -1,4 +1,4 @@
-package ru.yaal.contexthabit.room.converter;
+package ru.yaal.contexthabit.repo.room.converter;
 
 import androidx.room.TypeConverter;
 

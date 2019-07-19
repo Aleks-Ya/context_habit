@@ -1,4 +1,4 @@
-package ru.yaal.contexthabit.room;
+package ru.yaal.contexthabit.repo.room;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

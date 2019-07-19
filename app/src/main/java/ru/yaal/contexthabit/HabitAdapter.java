@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import ru.yaal.contexthabit.room.HabitEntity;
+import ru.yaal.contexthabit.repo.room.HabitEntity;
 
 public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ContextViewHolder> {
     private List<HabitEntity> habits;

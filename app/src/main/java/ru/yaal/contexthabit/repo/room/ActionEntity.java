@@ -1,4 +1,4 @@
-package ru.yaal.contexthabit.room;
+package ru.yaal.contexthabit.repo.room;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import ru.yaal.contexthabit.room.converter.LocalDateTimeConverters;
+import ru.yaal.contexthabit.repo.room.converter.LocalDateTimeConverters;
 
 @Entity
 @ToString

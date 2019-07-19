@@ -1,4 +1,4 @@
-package ru.yaal.contexthabit.room;
+package ru.yaal.contexthabit.repo.room;
 
 import android.content.Context;
 
@@ -10,12 +10,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 
+import ru.yaal.contexthabit.repo.Repository;
+import ru.yaal.contexthabit.repo.RepositoryImpl;
+
 @RunWith(AndroidJUnit4ClassRunner.class)
 public abstract class BaseAndroidTest {
     protected ContextDao contextDao;
     protected HabitDao habitDao;
     protected ActionDao actionDao;
     protected ContextHabitJoinDao contextHabitJoinDao;
+    protected Repository repository;
     private AppDatabase db;
 
     @Before
@@ -26,6 +30,7 @@ public abstract class BaseAndroidTest {
         habitDao = db.habitDao();
         actionDao = db.actionDao();
         contextHabitJoinDao = db.contextHabitJoinDao();
+        repository = new RepositoryImpl(contextDao, habitDao, contextHabitJoinDao);
     }
 
     @After
