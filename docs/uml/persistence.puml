@@ -1,0 +1,37 @@
+@startuml
+
+package "Activities" {
+    class MainActivity
+    class HabitsActivity
+}
+
+package "Room" {
+    class Repository
+
+    class ActionDao
+    class ContextDao
+    class HabitDao
+    class ContextHabitJoinDao
+
+    Repository --> ContextDao
+    Repository --> HabitDao
+    Repository --> ContextHabitJoinDao
+}
+
+database "SqlLite" {
+    class ActionEntity
+    class ContextEntity
+    class HabitEntity
+    class ContextHabitJoin
+}
+
+MainActivity --> Repository
+MainActivity -> HabitsActivity
+
+ActionDao -->  ActionEntity
+ContextDao -->  ContextEntity
+HabitDao -->  HabitEntity
+ContextHabitJoinDao -->  ContextHabitJoin
+
+@enduml
+
