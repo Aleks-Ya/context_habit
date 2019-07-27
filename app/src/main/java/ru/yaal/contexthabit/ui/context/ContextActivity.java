@@ -1,4 +1,4 @@
-package ru.yaal.contexthabit;
+package ru.yaal.contexthabit.ui.context;
 
 import android.os.Bundle;
 
@@ -18,18 +18,18 @@ import static ru.yaal.contexthabit.repo.room.ContextEntity.emptyContext;
 import static ru.yaal.contexthabit.repo.room.EntityBuilder.createContext;
 import static ru.yaal.contexthabit.repo.room.EntityBuilder.createHabit;
 
-public class MainActivity extends AppCompatActivity {
+public class ContextActivity extends AppCompatActivity {
     public static final String HABITS_EXTRA_NAME = "habits";
     public static Repository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        RecyclerView recyclerView = findViewById(R.id.main_view);
+        setContentView(R.layout.activity_context);
+        RecyclerView contextRecyclerView = findViewById(R.id.context_recycler_view);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        contextRecyclerView.setLayoutManager(layoutManager);
 
         AppDatabase database = Room.databaseBuilder(
                 this, AppDatabase.class, "context_habit")
@@ -53,6 +53,6 @@ public class MainActivity extends AppCompatActivity {
         repository.link(context1, habit3);
 
         RecyclerView.Adapter mAdapter = new ContextAdapter(repository.getAllContexts());
-        recyclerView.setAdapter(mAdapter);
+        contextRecyclerView.setAdapter(mAdapter);
     }
 }

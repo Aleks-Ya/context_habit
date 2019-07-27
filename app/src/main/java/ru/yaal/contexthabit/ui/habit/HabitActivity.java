@@ -1,4 +1,4 @@
-package ru.yaal.contexthabit;
+package ru.yaal.contexthabit.ui.habit;
 
 import android.os.Bundle;
 
@@ -8,23 +8,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import ru.yaal.contexthabit.android.R;
 
-import static ru.yaal.contexthabit.MainActivity.HABITS_EXTRA_NAME;
+import static ru.yaal.contexthabit.ui.context.ContextActivity.HABITS_EXTRA_NAME;
 
-public class HabitsActivity extends AppCompatActivity {
+public class HabitActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_habits);
+        setContentView(R.layout.activity_habit);
 
-        RecyclerView recyclerView = findViewById(R.id.habits_view);
+        RecyclerView habitRecyclerView = findViewById(R.id.habit_recycler_view);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        habitRecyclerView.setLayoutManager(layoutManager);
 
         HabitList habitList = (HabitList) getIntent().getSerializableExtra(HABITS_EXTRA_NAME);
 
         RecyclerView.Adapter mAdapter = new HabitAdapter(habitList.getHabits());
-        recyclerView.setAdapter(mAdapter);
+        habitRecyclerView.setAdapter(mAdapter);
     }
 }

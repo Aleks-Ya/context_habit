@@ -1,4 +1,4 @@
-package ru.yaal.contexthabit;
+package ru.yaal.contexthabit.ui.habit;
 
 import java.io.Serializable;
 import java.util.List;

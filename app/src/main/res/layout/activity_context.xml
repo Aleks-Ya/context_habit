@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ru.yaal.contexthabit.HabitsActivity">
+    tools:context="ru.yaal.contexthabit.ui.context.ContextActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/habits_view"
+        android:id="@+id/context_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"

@@ -9,13 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="ru.yaal.contexthabit.MainActivity">
+        <activity android:name="ru.yaal.contexthabit.ui.context.ContextActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="ru.yaal.contexthabit.HabitsActivity" />
+        <activity android:name="ru.yaal.contexthabit.ui.habit.HabitActivity" />
     </application>
 
 </manifest>
