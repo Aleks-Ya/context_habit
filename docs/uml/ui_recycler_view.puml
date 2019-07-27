@@ -1,0 +1,35 @@
+@startuml
+
+actor User
+
+User -> mainActivity : run
+mainActivity -> repository **: new
+|||
+mainActivity -> repository: get contexts
+repository --> mainActivity: List<ContextEntity>
+|||
+mainActivity -> contextAdapter **: new
+mainActivity -> contextAdapter : set contexts
+|||
+mainActivity -> contextRecyclerView **: new
+mainActivity -> contextRecyclerView : set adapter
+|||
+contextAdapter -> contextButton **: new
+contextAdapter -> contextViewHolder **: new(contextButton)
+|||
+contextAdapter -> contextViewHolder : bind ContextEntity to contextViewHolder
+contextAdapter -> repository : get habits for context
+repository --> contextAdapter: List<HabitEntity>
+contextAdapter -> contextButtonOnClickListener **: new(List<HabitEntity>)
+|||
+User -> contextButton :tap
+contextButton -> habitActivity : activate
+habitActivity -> habitRecyclerView **: new
+habitActivity -> habitAdapter **: new
+habitActivity -> habitRecyclerView **: set habitAdapter
+habitAdapter -> habitButton **: new
+|||
+habitAdapter -> habitViewHolder **: new(habitButton)
+habitAdapter -> habitViewHolder **: bind
+
+@enduml

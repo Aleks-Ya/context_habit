@@ -1,0 +1,14 @@
+@startuml
+
+allowmixing
+
+object contextActivity
+object habitActivity
+
+file "activity_context<U+002E>xml" as context_xml
+file "activity_habit<U+002E>xml" as habit_xml
+
+context_xml -> contextActivity :configures
+habit_xml -> habitActivity :configures
+
+@enduml
