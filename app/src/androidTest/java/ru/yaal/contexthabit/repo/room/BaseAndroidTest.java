@@ -34,7 +34,7 @@ public abstract class BaseAndroidTest {
         habitDao = db.habitDao();
         actionDao = db.actionDao();
         contextHabitJoinDao = db.contextHabitJoinDao();
-        repository = new RepositoryImpl(contextDao, habitDao, contextHabitJoinDao);
+        repository = new RepositoryImpl(contextDao, habitDao, contextHabitJoinDao, actionDao);
     }
 
     @After

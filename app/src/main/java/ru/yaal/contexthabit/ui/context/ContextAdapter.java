@@ -15,6 +15,7 @@ import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
 import ru.yaal.contexthabit.ui.habit.HabitActivity;
 import ru.yaal.contexthabit.ui.habit.HabitList;
 
+import static ru.yaal.contexthabit.ui.context.ContextActivity.CONTEXT_EXTRA_NAME;
 import static ru.yaal.contexthabit.ui.context.ContextActivity.HABITS_EXTRA_NAME;
 
 public class ContextAdapter extends RecyclerView.Adapter<ContextAdapter.ContextViewHolder> {
@@ -45,7 +46,7 @@ public class ContextAdapter extends RecyclerView.Adapter<ContextAdapter.ContextV
         ContextEntity context = dataSet.get(position);
         holder.view.setText(context.name);
         List<HabitEntity> habits = ContextActivity.repository.getHabitsForContext(context);
-        holder.view.setOnClickListener(new ContextButtonOnClickListener(habits));
+        holder.view.setOnClickListener(new ContextButtonOnClickListener(context, habits));
 
     }
 
@@ -55,15 +56,18 @@ public class ContextAdapter extends RecyclerView.Adapter<ContextAdapter.ContextV
     }
 
     public static class ContextButtonOnClickListener implements View.OnClickListener {
+        private final ContextEntity context;
         private final HabitList habits;
 
-        ContextButtonOnClickListener(List<HabitEntity> habits) {
+        ContextButtonOnClickListener(ContextEntity context, List<HabitEntity> habits) {
+            this.context = context;
             this.habits = new HabitList(habits);
         }
 
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(view.getContext(), HabitActivity.class);
+            intent.putExtra(CONTEXT_EXTRA_NAME, context);
             intent.putExtra(HABITS_EXTRA_NAME, habits);
             view.getContext().startActivity(intent);
         }

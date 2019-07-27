@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import ru.yaal.contexthabit.android.R;
+import ru.yaal.contexthabit.repo.room.context.ContextEntity;
 
+import static ru.yaal.contexthabit.ui.context.ContextActivity.CONTEXT_EXTRA_NAME;
 import static ru.yaal.contexthabit.ui.context.ContextActivity.HABITS_EXTRA_NAME;
 
 public class HabitActivity extends AppCompatActivity {
@@ -21,9 +23,10 @@ public class HabitActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+        ContextEntity context = (ContextEntity) getIntent().getSerializableExtra(CONTEXT_EXTRA_NAME);
         HabitList habitList = (HabitList) getIntent().getSerializableExtra(HABITS_EXTRA_NAME);
 
-        RecyclerView.Adapter mAdapter = new HabitViewAdapter(habitList.getHabits());
+        RecyclerView.Adapter mAdapter = new HabitViewAdapter(context, habitList.getHabits());
         recyclerView.setAdapter(mAdapter);
     }
 }

@@ -14,10 +14,14 @@ public interface ActionDao {
     List<ActionEntity> getAll();
 
     @Query("SELECT * FROM ActionEntity WHERE id = :actionId")
-    ActionEntity getById(int actionId);
+    ActionEntity getById(long actionId);
+
+    @Query("SELECT SUM(valueChange) FROM ActionEntity " +
+            "WHERE contextId = :contextId AND habitId = :habitId AND type = 'NEGATIVE'")
+    int getNegativeValue(long contextId, long habitId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(ActionEntity... actions);
+    long insert(ActionEntity actions);
 
     @Delete
     void delete(ActionEntity action);

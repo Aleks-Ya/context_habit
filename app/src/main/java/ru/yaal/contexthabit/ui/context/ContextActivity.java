@@ -20,6 +20,7 @@ import static ru.yaal.contexthabit.repo.room.context.ContextEntity.emptyContext;
 
 public class ContextActivity extends AppCompatActivity {
     public static final String HABITS_EXTRA_NAME = "habits";
+    public static final String CONTEXT_EXTRA_NAME = "context";
     public static Repository repository;
 
     @Override
@@ -37,7 +38,7 @@ public class ContextActivity extends AppCompatActivity {
                 .build();
 
         repository = new RepositoryImpl(database.contextDao(), database.habitDao(),
-                database.contextHabitJoinDao());
+                database.contextHabitJoinDao(), database.actionDao());
 
         ContextEntity context1 = createContext(1, "Want eat", emptyContext.id);
         ContextEntity context2 = createContext(2, "Leave home", emptyContext.id);

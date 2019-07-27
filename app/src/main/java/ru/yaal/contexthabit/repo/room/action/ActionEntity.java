@@ -9,26 +9,35 @@ import java.time.LocalDateTime;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import ru.yaal.contexthabit.repo.room.converter.ActionTypeConverters;
 import ru.yaal.contexthabit.repo.room.converter.LocalDateTimeConverters;
 
 @Entity
 @ToString
 @EqualsAndHashCode
 public class ActionEntity {
-    @PrimaryKey
-    public int id;
+    @PrimaryKey(autoGenerate = true)
+    public Long id;
 
     @ColumnInfo
-    public int contextId;
+    public Integer contextId;
 
     @ColumnInfo
-    public int habitId;
+    public Integer habitId;
 
     @ColumnInfo
     @TypeConverters(LocalDateTimeConverters.class)
     public LocalDateTime date;
 
     @ColumnInfo
-    public int valueChange;
+    @TypeConverters(ActionTypeConverters.class)
+    public ActionType type;
+
+    @ColumnInfo
+    public Integer valueChange;
+
+    public enum ActionType {
+        POSITIVE, NEGATIVE
+    }
 }
 
