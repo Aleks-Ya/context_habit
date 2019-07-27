@@ -66,4 +66,9 @@ public class RepositoryImpl implements Repository {
         return actionDao.getNegativeValue(contextId, habitId);
     }
 
+    @Override
+    public int getPositiveValue(long contextId, long habitId) {
+        return actionDao.getPositiveValue(contextId, habitId);
+    }
+
 }

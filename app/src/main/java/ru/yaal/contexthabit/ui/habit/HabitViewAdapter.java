@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDateTime;
@@ -17,6 +18,8 @@ import ru.yaal.contexthabit.repo.room.action.ActionEntity;
 import ru.yaal.contexthabit.repo.room.context.ContextEntity;
 import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
 import ru.yaal.contexthabit.ui.context.ContextActivity;
+
+import static ru.yaal.contexthabit.repo.room.action.ActionEntity.ActionType.NEGATIVE;
 
 public class HabitViewAdapter extends RecyclerView.Adapter<HabitViewAdapter.HabitViewHolder> {
     private ContextEntity context;
@@ -64,14 +67,16 @@ public class HabitViewAdapter extends RecyclerView.Adapter<HabitViewAdapter.Habi
         model.habitEntity.setValue(habit);
         int negativeCount = ContextActivity.repository.getNegativeValue(context.id, habit.id);
         model.negativeCount.setValue(negativeCount);
-        model.positiveCount.setValue(0);
+        int positiveCount = ContextActivity.repository.getPositiveValue(context.id, habit.id);
+        model.positiveCount.setValue(positiveCount);
 
-        NegativeMinusButtonOnClickListener negativeMinusButtonOnClickListener =
-                new NegativeMinusButtonOnClickListener(model);
+        ButtonOnClickListener negativeMinusButtonOnClickListener =
+                new ButtonOnClickListener(model, -1, NEGATIVE);
+        habitView.getNegativeMinusButton().setOnClickListener(negativeMinusButtonOnClickListener);
 
-        habitView.getNegativeMinusButton()
-                .setOnClickListener(negativeMinusButtonOnClickListener);
-
+        ButtonOnClickListener negativePlusButtonOnClickListener =
+                new ButtonOnClickListener(model, 1, NEGATIVE);
+        habitView.getNegativePlusButton().setOnClickListener(negativePlusButtonOnClickListener);
     }
 
     @Override
@@ -79,11 +84,15 @@ public class HabitViewAdapter extends RecyclerView.Adapter<HabitViewAdapter.Habi
         return habits.size();
     }
 
-    public static class NegativeMinusButtonOnClickListener implements View.OnClickListener {
+    private static class ButtonOnClickListener implements View.OnClickListener {
         private final HabitViewModel model;
+        private final int valueChange;
+        private final ActionEntity.ActionType type;
 
-        NegativeMinusButtonOnClickListener(HabitViewModel model) {
+        ButtonOnClickListener(HabitViewModel model, int valueChange, ActionEntity.ActionType type) {
             this.model = model;
+            this.valueChange = valueChange;
+            this.type = type;
         }
 
         @Override
@@ -94,15 +103,28 @@ public class HabitViewAdapter extends RecyclerView.Adapter<HabitViewAdapter.Habi
             HabitEntity habitEntity = model.habitEntity.getValue();
             actionEntity.habitId = habitEntity != null ? habitEntity.id : null;
             actionEntity.date = LocalDateTime.now();
-            actionEntity.valueChange = -1;
-            actionEntity.type = ActionEntity.ActionType.NEGATIVE;
+            actionEntity.valueChange = valueChange;
+            actionEntity.type = type;
 
             ContextActivity.repository.saveAction(actionEntity);
 
-            Integer negativeCountValue = model.negativeCount.getValue();
-            negativeCountValue = negativeCountValue != null ? negativeCountValue : 0;
-            int newValue = negativeCountValue + actionEntity.valueChange;
-            model.negativeCount.setValue(newValue);
+            switch (type) {
+                case POSITIVE:
+                    updateValue(model.negativeCount, valueChange);
+                    break;
+                case NEGATIVE:
+                    updateValue(model.negativeCount, valueChange);
+                    break;
+                default:
+                    throw new RuntimeException("Unknown ActionType: " + type);
+            }
+        }
+
+        private void updateValue(MutableLiveData<Integer> liveData, int valueChange) {
+            Integer value = liveData.getValue();
+            value = value != null ? value : 0;
+            int newValue = value + valueChange;
+            liveData.setValue(newValue);
         }
     }
 }
