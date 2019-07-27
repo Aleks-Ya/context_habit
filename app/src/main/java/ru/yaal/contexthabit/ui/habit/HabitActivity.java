@@ -17,14 +17,13 @@ public class HabitActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit);
 
-        RecyclerView habitRecyclerView = findViewById(R.id.habit_recycler_view);
-
+        RecyclerView recyclerView = findViewById(R.id.habit_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        habitRecyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(layoutManager);
 
         HabitList habitList = (HabitList) getIntent().getSerializableExtra(HABITS_EXTRA_NAME);
 
-        RecyclerView.Adapter mAdapter = new HabitAdapter(habitList.getHabits());
-        habitRecyclerView.setAdapter(mAdapter);
+        RecyclerView.Adapter mAdapter = new HabitViewAdapter(habitList.getHabits());
+        recyclerView.setAdapter(mAdapter);
     }
 }
