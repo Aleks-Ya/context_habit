@@ -30,4 +30,16 @@ public class HabitView extends ConstraintLayout {
         return findViewById(R.id.negativeValueTextView);
     }
 
+    public Button getPositiveMinusButton() {
+        return findViewById(R.id.positiveMinusButton);
+    }
+
+    public Button getPositivePlusButton() {
+        return findViewById(R.id.positivePlusButton);
+    }
+
+    public TextView getPositiveValueTextView() {
+        return findViewById(R.id.positiveValueTextView);
+    }
+
 }

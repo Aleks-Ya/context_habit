@@ -18,7 +18,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:text="No Hungry No Eat " />
+            android:text="@string/habit_name_default" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -30,21 +30,42 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="neg-" />
+                android:text="@string/habit_negative_minus_button_name" />
 
             <TextView
                 android:id="@+id/negativeValueTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="-3" />
+                android:text="@string/habit_negative_value_default" />
 
             <Button
                 android:id="@+id/negativePlusButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="neg+" />
+                android:text="@string/habit_negative_plus_button_name" />
+
+            <Button
+                android:id="@+id/positiveMinusButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/habit_positive_minus_button_name" />
+
+            <TextView
+                android:id="@+id/positiveValueTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/habit_positive_value_default" />
+
+            <Button
+                android:id="@+id/positivePlusButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/habit_positive_plus_button_name" />
         </LinearLayout>
     </LinearLayout>
 

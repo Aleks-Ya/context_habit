@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,9 +18,10 @@ import ru.yaal.contexthabit.android.R;
 import ru.yaal.contexthabit.repo.room.action.ActionEntity;
 import ru.yaal.contexthabit.repo.room.context.ContextEntity;
 import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
-import ru.yaal.contexthabit.ui.context.ContextActivity;
 
 import static ru.yaal.contexthabit.repo.room.action.ActionEntity.ActionType.NEGATIVE;
+import static ru.yaal.contexthabit.repo.room.action.ActionEntity.ActionType.POSITIVE;
+import static ru.yaal.contexthabit.ui.context.ContextActivity.repository;
 
 public class HabitViewAdapter extends RecyclerView.Adapter<HabitViewAdapter.HabitViewHolder> {
     private ContextEntity context;
@@ -57,26 +59,27 @@ public class HabitViewAdapter extends RecyclerView.Adapter<HabitViewAdapter.Habi
         model.habitEntity.observe(habitActivity, habitEntityObserver);
 
         TextView negativeValueTextView = habitView.getNegativeValueTextView();
-        IntegerObserver negativeValueObserver = new IntegerObserver(negativeValueTextView);
-        model.negativeCount.observe(habitActivity, negativeValueObserver);
+        model.negativeCount.observe(habitActivity, new IntegerObserver(negativeValueTextView));
 
+        TextView positiveValueTextView = habitView.getPositiveValueTextView();
+        model.positiveCount.observe(habitActivity, new IntegerObserver(positiveValueTextView));
 
         HabitEntity habit = habits.get(position);
-
         model.contextEntity.setValue(context);
         model.habitEntity.setValue(habit);
-        int negativeCount = ContextActivity.repository.getNegativeValue(context.id, habit.id);
-        model.negativeCount.setValue(negativeCount);
-        int positiveCount = ContextActivity.repository.getPositiveValue(context.id, habit.id);
-        model.positiveCount.setValue(positiveCount);
+        model.negativeCount.setValue(repository.getNegativeValue(context.id, habit.id));
+        model.positiveCount.setValue(repository.getPositiveValue(context.id, habit.id));
 
-        ButtonOnClickListener negativeMinusButtonOnClickListener =
-                new ButtonOnClickListener(model, -1, NEGATIVE);
-        habitView.getNegativeMinusButton().setOnClickListener(negativeMinusButtonOnClickListener);
+        addButtonListener(habitView.getNegativeMinusButton(), model, -1, NEGATIVE);
+        addButtonListener(habitView.getNegativePlusButton(), model, 1, NEGATIVE);
+        addButtonListener(habitView.getPositiveMinusButton(), model, -1, POSITIVE);
+        addButtonListener(habitView.getPositivePlusButton(), model, 1, POSITIVE);
+    }
 
-        ButtonOnClickListener negativePlusButtonOnClickListener =
-                new ButtonOnClickListener(model, 1, NEGATIVE);
-        habitView.getNegativePlusButton().setOnClickListener(negativePlusButtonOnClickListener);
+    private void addButtonListener(Button button, HabitViewModel model, int valueChange,
+                                   ActionEntity.ActionType type) {
+        ButtonOnClickListener listener = new ButtonOnClickListener(model, valueChange, type);
+        button.setOnClickListener(listener);
     }
 
     @Override
@@ -106,11 +109,11 @@ public class HabitViewAdapter extends RecyclerView.Adapter<HabitViewAdapter.Habi
             actionEntity.valueChange = valueChange;
             actionEntity.type = type;
 
-            ContextActivity.repository.saveAction(actionEntity);
+            repository.saveAction(actionEntity);
 
             switch (type) {
                 case POSITIVE:
-                    updateValue(model.negativeCount, valueChange);
+                    updateValue(model.positiveCount, valueChange);
                     break;
                 case NEGATIVE:
                     updateValue(model.negativeCount, valueChange);
