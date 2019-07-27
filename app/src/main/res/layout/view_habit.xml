@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ru.yaal.contexthabit.ui.habit.HabitView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/myView"
     android:layout_width="wrap_content"
@@ -7,9 +8,15 @@
     tools:context="ru.yaal.contexthabit.ui.habit.HabitView">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/habitNameTextView"
@@ -27,44 +34,52 @@
 
             <Button
                 android:id="@+id/negativeMinusButton"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:minWidth="@dimen/habit_button_width_min"
                 android:text="@string/habit_negative_minus_button_name" />
 
             <TextView
                 android:id="@+id/negativeValueTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/habit_negative_value_default" />
+                android:layout_weight="20"
+                android:text="@string/habit_negative_value_default"
+                android:textColor="#F44336"
+                android:textSize="30sp" />
 
             <Button
                 android:id="@+id/negativePlusButton"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:minWidth="@dimen/habit_button_width_min"
                 android:text="@string/habit_negative_plus_button_name" />
 
             <Button
                 android:id="@+id/positiveMinusButton"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:minWidth="@dimen/habit_button_width_min"
                 android:text="@string/habit_positive_minus_button_name" />
 
             <TextView
                 android:id="@+id/positiveValueTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/habit_positive_value_default" />
+                android:layout_weight="20"
+                android:text="@string/habit_positive_value_default"
+                android:textColor="#4CAF50"
+                android:textSize="30sp" />
 
             <Button
                 android:id="@+id/positivePlusButton"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:minWidth="@dimen/habit_button_width_min"
                 android:text="@string/habit_positive_plus_button_name" />
         </LinearLayout>
     </LinearLayout>

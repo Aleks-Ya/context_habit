@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">ContextHabit</string>
     <string name="habit_name_default">No Hungry No Eat</string>
-    <string name="habit_negative_minus_button_name">neg-</string>
-    <string name="habit_positive_minus_button_name">pos-</string>
-    <string name="habit_positive_plus_button_name">pos+</string>
-    <string name="habit_negative_plus_button_name">neg+</string>
+    <string name="habit_negative_minus_button_name">↓</string>
+    <string name="habit_positive_minus_button_name">↓</string>
+    <string name="habit_positive_plus_button_name">↑</string>
+    <string name="habit_negative_plus_button_name">↑</string>
     <string name="habit_negative_value_default">0</string>
     <string name="habit_positive_value_default">0</string>
 </resources>
