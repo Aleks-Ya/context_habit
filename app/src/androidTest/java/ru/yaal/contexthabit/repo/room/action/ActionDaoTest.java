@@ -1,10 +1,12 @@
-package ru.yaal.contexthabit.repo.room;
+package ru.yaal.contexthabit.repo.room.action;
 
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import ru.yaal.contexthabit.repo.room.BaseAndroidTest;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertNull;

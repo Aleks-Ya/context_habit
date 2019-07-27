@@ -12,6 +12,10 @@ import org.junit.runner.RunWith;
 
 import ru.yaal.contexthabit.repo.Repository;
 import ru.yaal.contexthabit.repo.RepositoryImpl;
+import ru.yaal.contexthabit.repo.room.action.ActionDao;
+import ru.yaal.contexthabit.repo.room.context.ContextDao;
+import ru.yaal.contexthabit.repo.room.context.ContextHabitJoinDao;
+import ru.yaal.contexthabit.repo.room.habit.HabitDao;
 
 @RunWith(AndroidJUnit4ClassRunner.class)
 public abstract class BaseAndroidTest {

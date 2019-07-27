@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 import ru.yaal.contexthabit.android.R;
-import ru.yaal.contexthabit.repo.room.HabitEntity;
+import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
 
 public class HabitViewAdapter extends RecyclerView.Adapter<HabitViewAdapter.HabitViewHolder> {
     private List<HabitEntity> habits;

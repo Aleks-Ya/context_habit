@@ -1,5 +1,9 @@
 package ru.yaal.contexthabit.repo.room;
 
+import ru.yaal.contexthabit.repo.room.context.ContextEntity;
+import ru.yaal.contexthabit.repo.room.context.ContextHabitJoin;
+import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
+
 public class EntityBuilder {
 
     public static ContextEntity createContext(int contextId, String contextName,

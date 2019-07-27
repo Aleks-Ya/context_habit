@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import ru.yaal.contexthabit.repo.room.ContextEntity;
-import ru.yaal.contexthabit.repo.room.HabitEntity;
+import ru.yaal.contexthabit.repo.room.context.ContextEntity;
+import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
 import ru.yaal.contexthabit.ui.habit.HabitActivity;
 import ru.yaal.contexthabit.ui.habit.HabitList;
 

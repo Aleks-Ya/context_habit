@@ -1,4 +1,4 @@
-package ru.yaal.contexthabit.repo.room;
+package ru.yaal.contexthabit.repo.room.context;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -7,6 +7,8 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import java.util.List;
+
+import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
 
 @Dao
 public interface ContextHabitJoinDao {

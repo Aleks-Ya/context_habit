@@ -1,10 +1,11 @@
-package ru.yaal.contexthabit.repo.room;
+package ru.yaal.contexthabit.repo.room.context;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
 
 @ToString
 @EqualsAndHashCode

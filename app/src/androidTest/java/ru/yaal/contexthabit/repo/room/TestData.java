@@ -1,5 +1,8 @@
 package ru.yaal.contexthabit.repo.room;
 
+import ru.yaal.contexthabit.repo.room.context.ContextEntity;
+import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
+
 import static ru.yaal.contexthabit.repo.room.EntityBuilder.createHabit;
 
 public class TestData {

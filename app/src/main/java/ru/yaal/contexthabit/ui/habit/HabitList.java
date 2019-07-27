@@ -3,7 +3,7 @@ package ru.yaal.contexthabit.ui.habit;
 import java.io.Serializable;
 import java.util.List;
 
-import ru.yaal.contexthabit.repo.room.HabitEntity;
+import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
 
 public class HabitList implements Serializable {
     private final List<HabitEntity> habits;

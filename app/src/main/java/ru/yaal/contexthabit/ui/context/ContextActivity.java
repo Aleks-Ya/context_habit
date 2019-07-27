@@ -11,12 +11,12 @@ import ru.yaal.contexthabit.android.R;
 import ru.yaal.contexthabit.repo.Repository;
 import ru.yaal.contexthabit.repo.RepositoryImpl;
 import ru.yaal.contexthabit.repo.room.AppDatabase;
-import ru.yaal.contexthabit.repo.room.ContextEntity;
-import ru.yaal.contexthabit.repo.room.HabitEntity;
+import ru.yaal.contexthabit.repo.room.context.ContextEntity;
+import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
 
-import static ru.yaal.contexthabit.repo.room.ContextEntity.emptyContext;
 import static ru.yaal.contexthabit.repo.room.EntityBuilder.createContext;
 import static ru.yaal.contexthabit.repo.room.EntityBuilder.createHabit;
+import static ru.yaal.contexthabit.repo.room.context.ContextEntity.emptyContext;
 
 public class ContextActivity extends AppCompatActivity {
     public static final String HABITS_EXTRA_NAME = "habits";

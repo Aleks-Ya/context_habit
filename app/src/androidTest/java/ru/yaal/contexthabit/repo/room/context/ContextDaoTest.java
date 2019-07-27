@@ -1,6 +1,8 @@
-package ru.yaal.contexthabit.repo.room;
+package ru.yaal.contexthabit.repo.room.context;
 
 import org.junit.Test;
+
+import ru.yaal.contexthabit.repo.room.BaseAndroidTest;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.containsInAnyOrder;

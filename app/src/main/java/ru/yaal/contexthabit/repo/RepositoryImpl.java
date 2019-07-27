@@ -2,11 +2,11 @@ package ru.yaal.contexthabit.repo;
 
 import java.util.List;
 
-import ru.yaal.contexthabit.repo.room.ContextDao;
-import ru.yaal.contexthabit.repo.room.ContextEntity;
-import ru.yaal.contexthabit.repo.room.ContextHabitJoinDao;
-import ru.yaal.contexthabit.repo.room.HabitDao;
-import ru.yaal.contexthabit.repo.room.HabitEntity;
+import ru.yaal.contexthabit.repo.room.context.ContextDao;
+import ru.yaal.contexthabit.repo.room.context.ContextEntity;
+import ru.yaal.contexthabit.repo.room.context.ContextHabitJoinDao;
+import ru.yaal.contexthabit.repo.room.habit.HabitDao;
+import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
 
 import static ru.yaal.contexthabit.repo.room.EntityBuilder.createContextHabitJoin;
 
