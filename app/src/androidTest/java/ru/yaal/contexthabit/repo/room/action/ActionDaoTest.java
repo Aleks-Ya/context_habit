@@ -56,11 +56,11 @@ public class ActionDaoTest extends BaseAndroidTest {
     }
 
     @Test
-    public void getNegativeValueById() {
+    public void getNegativeValue() {
         int contextId = 1;
         int habitId = 2;
 
-        assertThat(actionDao.getNegativeValue(contextId, habitId), equalTo(0));
+        assertThat(actionDao.getNegativeValue(habitId), equalTo(0));
 
         ActionEntity negAction1 = new ActionEntity();
         negAction1.contextId = contextId;
@@ -68,7 +68,7 @@ public class ActionDaoTest extends BaseAndroidTest {
         negAction1.type = ActionEntity.ActionType.NEGATIVE;
         negAction1.valueChange = -2;
         actionDao.insert(negAction1);
-        assertThat(actionDao.getNegativeValue(contextId, habitId), equalTo(-2));
+        assertThat(actionDao.getNegativeValue(habitId), equalTo(-2));
 
         ActionEntity negAction2 = new ActionEntity();
         negAction2.contextId = contextId;
@@ -76,7 +76,7 @@ public class ActionDaoTest extends BaseAndroidTest {
         negAction2.type = ActionEntity.ActionType.NEGATIVE;
         negAction2.valueChange = -1;
         actionDao.insert(negAction2);
-        assertThat(actionDao.getNegativeValue(contextId, habitId), equalTo(-3));
+        assertThat(actionDao.getNegativeValue(habitId), equalTo(-3));
 
         ActionEntity posAction = new ActionEntity();
         posAction.contextId = contextId;
@@ -84,15 +84,15 @@ public class ActionDaoTest extends BaseAndroidTest {
         posAction.type = ActionEntity.ActionType.POSITIVE;
         posAction.valueChange = -1;
         actionDao.insert(posAction);
-        assertThat(actionDao.getNegativeValue(contextId, habitId), equalTo(-3));
+        assertThat(actionDao.getNegativeValue(habitId), equalTo(-3));
 
         ActionEntity anotherContextAction = new ActionEntity();
         anotherContextAction.contextId = contextId + 1;
         anotherContextAction.habitId = habitId;
         anotherContextAction.type = ActionEntity.ActionType.NEGATIVE;
-        anotherContextAction.valueChange = -1;
+        anotherContextAction.valueChange = -4;
         actionDao.insert(anotherContextAction);
-        assertThat(actionDao.getNegativeValue(contextId, habitId), equalTo(-3));
+        assertThat(actionDao.getNegativeValue(habitId), equalTo(-7));
 
         ActionEntity anotherHabitAction = new ActionEntity();
         anotherHabitAction.contextId = contextId;
@@ -100,7 +100,7 @@ public class ActionDaoTest extends BaseAndroidTest {
         anotherHabitAction.type = ActionEntity.ActionType.NEGATIVE;
         anotherHabitAction.valueChange = -1;
         actionDao.insert(anotherHabitAction);
-        assertThat(actionDao.getNegativeValue(contextId, habitId), equalTo(-3));
+        assertThat(actionDao.getNegativeValue(habitId), equalTo(-7));
     }
 
 

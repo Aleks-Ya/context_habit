@@ -19,7 +19,7 @@ public interface Repository {
 
     ActionEntity saveAction(ActionEntity actionEntity);
 
-    int getNegativeValue(long contextId, long habitId);
+    int getNegativeValue(long habitId);
 
-    int getPositiveValue(long contextId, long habitId);
+    int getPositiveValue(long habitId);
 }

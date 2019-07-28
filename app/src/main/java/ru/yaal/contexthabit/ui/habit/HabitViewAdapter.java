@@ -67,8 +67,8 @@ public class HabitViewAdapter extends RecyclerView.Adapter<HabitViewAdapter.Habi
         HabitEntity habit = habits.get(position);
         model.contextEntity.setValue(context);
         model.habitEntity.setValue(habit);
-        model.negativeCount.setValue(repository.getNegativeValue(context.id, habit.id));
-        model.positiveCount.setValue(repository.getPositiveValue(context.id, habit.id));
+        model.negativeCount.setValue(repository.getNegativeValue(habit.id));
+        model.positiveCount.setValue(repository.getPositiveValue(habit.id));
 
         addButtonListener(habitView.getNegativeMinusButton(), model, -1, NEGATIVE);
         addButtonListener(habitView.getNegativePlusButton(), model, 1, NEGATIVE);

@@ -17,12 +17,12 @@ public interface ActionDao {
     ActionEntity getById(long actionId);
 
     @Query("SELECT SUM(valueChange) FROM ActionEntity " +
-            "WHERE contextId = :contextId AND habitId = :habitId AND type = 'NEGATIVE'")
-    int getNegativeValue(long contextId, long habitId);
+            "WHERE habitId = :habitId AND type = 'NEGATIVE'")
+    int getNegativeValue(long habitId);
 
     @Query("SELECT SUM(valueChange) FROM ActionEntity " +
-            "WHERE contextId = :contextId AND habitId = :habitId AND type = 'POSITIVE'")
-    int getPositiveValue(long contextId, long habitId);
+            "WHERE habitId = :habitId AND type = 'POSITIVE'")
+    int getPositiveValue(long habitId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(ActionEntity actions);
