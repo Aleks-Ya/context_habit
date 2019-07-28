@@ -7,9 +7,9 @@ import ru.yaal.contexthabit.repo.room.context.ContextEntity;
 import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
 
 public interface Repository {
-    void saveContext(ContextEntity... contextEntities);
+    ContextEntity saveContext(ContextEntity contextEntity);
 
-    void saveHabit(HabitEntity... habitEntity);
+    HabitEntity saveHabit(HabitEntity habitEntity);
 
     void link(ContextEntity contextEntity, HabitEntity habitEntity);
 

@@ -6,8 +6,8 @@ import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
 
 public class EntityBuilder {
 
-    public static ContextEntity createContext(int contextId, String contextName,
-                                              int parentContextId) {
+    public static ContextEntity createContext(Long contextId, String contextName,
+                                              long parentContextId) {
         ContextEntity context = new ContextEntity();
         context.id = contextId;
         context.name = contextName;
@@ -15,14 +15,14 @@ public class EntityBuilder {
         return context;
     }
 
-    public static HabitEntity createHabit(int habitId, String habitName) {
+    public static HabitEntity createHabit(Long habitId, String habitName) {
         HabitEntity habit = new HabitEntity();
         habit.id = habitId;
         habit.name = habitName;
         return habit;
     }
 
-    public static ContextHabitJoin createContextHabitJoin(int contextId, int habitId) {
+    public static ContextHabitJoin createContextHabitJoin(Long contextId, Long habitId) {
         ContextHabitJoin join = new ContextHabitJoin();
         join.contextId = contextId;
         join.habitId = habitId;

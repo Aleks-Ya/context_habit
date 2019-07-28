@@ -29,13 +29,15 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
-    public void saveContext(ContextEntity... contextEntities) {
-        contextDao.insert(contextEntities);
+    public ContextEntity saveContext(ContextEntity contextEntity) {
+        contextEntity.id = contextDao.insert(contextEntity);
+        return contextEntity;
     }
 
     @Override
-    public void saveHabit(HabitEntity... habitEntity) {
-        habitDao.insert(habitEntity);
+    public HabitEntity saveHabit(HabitEntity habitEntity) {
+        habitEntity.id = habitDao.insert(habitEntity);
+        return habitEntity;
     }
 
     @Override

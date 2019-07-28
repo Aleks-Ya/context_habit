@@ -17,48 +17,49 @@ public class ActionDaoTest extends BaseAndroidTest {
     @Test
     public void insert() {
         ActionEntity expAction = new ActionEntity();
-        expAction.id = 1L;
-        expAction.contextId = 1;
-        expAction.habitId = 1;
+        expAction.contextId = 1L;
+        expAction.habitId = 1L;
         expAction.date = LocalDateTime.now();
         expAction.valueChange = 1;
 
-        actionDao.insert(expAction);
+        long actionId = actionDao.insert(expAction);
+        expAction.id = actionId;
 
-        ActionEntity actAction = actionDao.getById(expAction.id);
+        ActionEntity actAction = actionDao.getById(actionId);
         assertThat(actAction, equalTo(expAction));
     }
 
     @Test
     public void delete() {
         ActionEntity action = new ActionEntity();
-        action.id = 2L;
 
-        actionDao.insert(action);
-        assertThat(actionDao.getById(action.id), equalTo(action));
+        long actionId = actionDao.insert(action);
+        action.id = actionId;
+        assertThat(actionDao.getById(actionId), equalTo(action));
 
         actionDao.delete(action);
-        assertNull(actionDao.getById(action.id));
+        assertNull(actionDao.getById(actionId));
     }
 
     @Test
     public void getAll() {
         ActionEntity action1 = new ActionEntity();
-        action1.id = 3L;
-
         ActionEntity action2 = new ActionEntity();
-        action2.id = 4L;
 
-        actionDao.insert(action1);
-        actionDao.insert(action2);
+        long actionId1 = actionDao.insert(action1);
+        long actionId2 = actionDao.insert(action2);
+
+        action1.id = actionId1;
+        action2.id = actionId2;
+
         List<ActionEntity> allContexts = actionDao.getAll();
         assertThat(allContexts, Matchers.containsInAnyOrder(action1, action2));
     }
 
     @Test
     public void getNegativeValue() {
-        int contextId = 1;
-        int habitId = 2;
+        long contextId = 1L;
+        long habitId = 2L;
 
         assertThat(actionDao.getNegativeValue(habitId), equalTo(0));
 

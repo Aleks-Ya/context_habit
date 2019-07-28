@@ -22,13 +22,13 @@ public interface ContextHabitJoinDao {
             "INNER JOIN ContextHabitJoin " +
             "ON ContextEntity.id=ContextHabitJoin.contextId " +
             "WHERE ContextHabitJoin.habitId=:habitId")
-    List<ContextEntity> getContextsForHabit(final int habitId);
+    List<ContextEntity> getContextsForHabit(final long habitId);
 
     @Query("SELECT * FROM HabitEntity " +
             "INNER JOIN ContextHabitJoin " +
             "ON HabitEntity.id=ContextHabitJoin.habitId " +
             "WHERE ContextHabitJoin.contextId=:contextId")
-    List<HabitEntity> getHabitsForContext(final int contextId);
+    List<HabitEntity> getHabitsForContext(final long contextId);
 
     @Delete
     void delete(ContextHabitJoin contextHabitJoin);

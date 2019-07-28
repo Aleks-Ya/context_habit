@@ -13,15 +13,21 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 public class ContextEntity implements Serializable {
-    @PrimaryKey
-    public int id;
+    @PrimaryKey(autoGenerate = true)
+    public Long id;
 
     @ColumnInfo
-    public Integer parentContextId;
+    public Long parentContextId;
 
     @ColumnInfo
     public String name;
 
-    public static final ContextEntity emptyContext = new ContextEntity();
+    public static final ContextEntity emptyContext = createEmptyContext();
+
+    private static ContextEntity createEmptyContext() {
+        ContextEntity context = new ContextEntity();
+        context.id = 0L;
+        return context;
+    }
 }
 

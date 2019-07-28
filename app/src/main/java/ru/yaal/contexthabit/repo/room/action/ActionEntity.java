@@ -20,10 +20,10 @@ public class ActionEntity {
     public Long id;
 
     @ColumnInfo
-    public Integer contextId;
+    public Long contextId;
 
     @ColumnInfo
-    public Integer habitId;
+    public Long habitId;
 
     @ColumnInfo
     @TypeConverters(LocalDateTimeConverters.class)

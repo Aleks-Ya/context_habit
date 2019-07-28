@@ -13,8 +13,8 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 public class HabitEntity implements Serializable {
-    @PrimaryKey
-    public int id;
+    @PrimaryKey(autoGenerate = true)
+    public Long id;
 
     @ColumnInfo
     public String name;

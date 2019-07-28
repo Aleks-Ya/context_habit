@@ -19,7 +19,7 @@ import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
                         childColumns = "habitId")
         })
 public class ContextHabitJoin {
-    public int contextId;
-    public int habitId;
+    public long contextId;
+    public long habitId;
 }
 

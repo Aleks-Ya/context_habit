@@ -14,10 +14,10 @@ public interface ContextDao {
     List<ContextEntity> getAll();
 
     @Query("SELECT * FROM ContextEntity WHERE id = :contextId")
-    ContextEntity getById(int contextId);
+    ContextEntity getById(long contextId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(ContextEntity... contexts);
+    long insert(ContextEntity context);
 
     @Delete
     void delete(ContextEntity context);

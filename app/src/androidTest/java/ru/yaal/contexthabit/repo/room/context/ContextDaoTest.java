@@ -8,29 +8,38 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
-import static ru.yaal.contexthabit.repo.room.TestData.context1;
-import static ru.yaal.contexthabit.repo.room.TestData.context2;
+import static ru.yaal.contexthabit.repo.room.TestData.createContextNoId1;
+import static ru.yaal.contexthabit.repo.room.TestData.createContextNoId2;
 
 public class ContextDaoTest extends BaseAndroidTest {
 
     @Test
     public void insert() {
-        contextDao.insert(context1);
-        assertThat(contextDao.getById(context1.id), equalTo(context1));
+        ContextEntity context = createContextNoId1();
+        long contextId = contextDao.insert(context);
+        context.id = contextId;
+        assertThat(contextDao.getById(contextId), equalTo(context));
     }
 
     @Test
     public void delete() {
-        contextDao.insert(context1);
-        assertThat(contextDao.getById(context1.id), equalTo(context1));
+        ContextEntity context = createContextNoId1();
+        long contextId = contextDao.insert(context);
+        context.id = contextId;
+        assertThat(contextDao.getById(contextId), equalTo(context));
 
-        contextDao.delete(context1);
-        assertNull(contextDao.getById(context1.id));
+        contextDao.delete(context);
+        assertNull(contextDao.getById(contextId));
     }
 
     @Test
     public void getAll() {
-        contextDao.insert(context1, context2);
+        ContextEntity context1 = createContextNoId1();
+        ContextEntity context2 = createContextNoId2();
+        long contextId1 = contextDao.insert(context1);
+        long contextId2 = contextDao.insert(context2);
+        context1.id = contextId1;
+        context2.id = contextId2;
         assertThat(contextDao.getAll(), containsInAnyOrder(context1, context2));
     }
 

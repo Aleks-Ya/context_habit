@@ -14,10 +14,10 @@ public interface HabitDao {
     List<HabitEntity> getAll();
 
     @Query("SELECT * FROM HabitEntity WHERE id = :habitId")
-    HabitEntity getById(int habitId);
+    HabitEntity getById(long habitId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(HabitEntity... habits);
+    long insert(HabitEntity habit);
 
     @Delete
     void delete(HabitEntity habit);
