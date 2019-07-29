@@ -11,6 +11,8 @@ import ru.yaal.contexthabit.repo.room.context.ContextEntity;
 import ru.yaal.contexthabit.repo.room.context.ContextHabitJoinDao;
 import ru.yaal.contexthabit.repo.room.habit.HabitDao;
 import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
+import ru.yaal.contexthabit.repo.room.habit.ScheduleDao;
+import ru.yaal.contexthabit.repo.room.habit.ScheduleEntity;
 
 import static ru.yaal.contexthabit.repo.room.EntityBuilder.createContextHabitJoin;
 
@@ -19,13 +21,16 @@ public class RepositoryImpl implements Repository {
     private final HabitDao habitDao;
     private final ContextHabitJoinDao contextHabitJoinDao;
     private final ActionDao actionDao;
+    private final ScheduleDao scheduleDao;
 
     public RepositoryImpl(ContextDao contextDao, HabitDao habitDao,
-                          ContextHabitJoinDao contextHabitJoinDao, ActionDao actionDao) {
+                          ContextHabitJoinDao contextHabitJoinDao, ActionDao actionDao,
+                          ScheduleDao scheduleDao) {
         this.contextDao = contextDao;
         this.habitDao = habitDao;
         this.contextHabitJoinDao = contextHabitJoinDao;
         this.actionDao = actionDao;
+        this.scheduleDao = scheduleDao;
     }
 
     @Override
@@ -71,6 +76,12 @@ public class RepositoryImpl implements Repository {
     @Override
     public int getPositiveValue(long habitId) {
         return actionDao.getPositiveValue(habitId);
+    }
+
+    @Override
+    public ScheduleEntity saveSchedule(ScheduleEntity scheduleEntity) {
+        scheduleEntity.id = scheduleDao.insert(scheduleEntity);
+        return scheduleEntity;
     }
 
 }

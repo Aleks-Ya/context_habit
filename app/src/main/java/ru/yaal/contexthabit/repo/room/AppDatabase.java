@@ -11,9 +11,11 @@ import ru.yaal.contexthabit.repo.room.context.ContextHabitJoin;
 import ru.yaal.contexthabit.repo.room.context.ContextHabitJoinDao;
 import ru.yaal.contexthabit.repo.room.habit.HabitDao;
 import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
+import ru.yaal.contexthabit.repo.room.habit.ScheduleDao;
+import ru.yaal.contexthabit.repo.room.habit.ScheduleEntity;
 
 @Database(entities = {ActionEntity.class, ContextEntity.class,
-        HabitEntity.class, ContextHabitJoin.class}, version = 1)
+        HabitEntity.class, ContextHabitJoin.class, ScheduleEntity.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract ContextDao contextDao();
 
@@ -22,5 +24,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract ActionDao actionDao();
 
     public abstract ContextHabitJoinDao contextHabitJoinDao();
+
+    public abstract ScheduleDao scheduleDao();
 }
 

@@ -14,6 +14,8 @@ import static ru.yaal.contexthabit.repo.room.TestData.createContextNoId1;
 import static ru.yaal.contexthabit.repo.room.TestData.createContextNoId2;
 import static ru.yaal.contexthabit.repo.room.TestData.createHabitNoId1;
 import static ru.yaal.contexthabit.repo.room.TestData.createHabitNoId2;
+import static ru.yaal.contexthabit.repo.room.TestData.createScheduleNoIdDaily;
+import static ru.yaal.contexthabit.repo.room.TestData.createScheduleNoIdWeekly;
 
 public class RepositoryImplTest extends BaseAndroidTest {
 
@@ -29,6 +31,9 @@ public class RepositoryImplTest extends BaseAndroidTest {
     @Test
     public void saveHabit() {
         assertThat(habitDao.getAll(), is(empty()));
+
+        repository.saveSchedule(createScheduleNoIdDaily());
+        repository.saveSchedule(createScheduleNoIdWeekly());
         HabitEntity habit1 = repository.saveHabit(createHabitNoId1());
         HabitEntity habit2 = repository.saveHabit(createHabitNoId2());
         assertThat(habitDao.getAll(), containsInAnyOrder(habit1, habit2));
@@ -36,6 +41,9 @@ public class RepositoryImplTest extends BaseAndroidTest {
 
     @Test
     public void link() {
+        repository.saveSchedule(createScheduleNoIdDaily());
+        repository.saveSchedule(createScheduleNoIdWeekly());
+
         ContextEntity context1 = repository.saveContext(createContextNoId1());
         HabitEntity habit1 = repository.saveHabit(createHabitNoId1());
         HabitEntity habit2 = repository.saveHabit(createHabitNoId2());

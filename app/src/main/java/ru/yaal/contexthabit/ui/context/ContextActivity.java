@@ -42,7 +42,7 @@ public class ContextActivity extends AppCompatActivity {
                 .build();
 
         repository = new RepositoryImpl(database.contextDao(), database.habitDao(),
-                database.contextHabitJoinDao(), database.actionDao());
+                database.contextHabitJoinDao(), database.actionDao(), database.scheduleDao());
 
         RecyclerView.Adapter mAdapter = new ContextAdapter(repository.getAllContexts());
         contextRecyclerView.setAdapter(mAdapter);

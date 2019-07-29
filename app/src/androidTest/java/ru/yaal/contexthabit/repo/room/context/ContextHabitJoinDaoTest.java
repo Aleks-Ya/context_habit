@@ -18,6 +18,8 @@ import static ru.yaal.contexthabit.repo.room.TestData.createContextNoId2;
 import static ru.yaal.contexthabit.repo.room.TestData.createContextNoId3;
 import static ru.yaal.contexthabit.repo.room.TestData.createHabitNoId1;
 import static ru.yaal.contexthabit.repo.room.TestData.createHabitNoId2;
+import static ru.yaal.contexthabit.repo.room.TestData.createScheduleNoIdDaily;
+import static ru.yaal.contexthabit.repo.room.TestData.createScheduleNoIdWeekly;
 
 public class ContextHabitJoinDaoTest extends BaseAndroidTest {
 
@@ -27,6 +29,7 @@ public class ContextHabitJoinDaoTest extends BaseAndroidTest {
         long contextId = contextDao.insert(context);
         context.id = contextId;
 
+        repository.saveSchedule(createScheduleNoIdDaily());
         HabitEntity habit = createHabitNoId1();
         long habitId = habitDao.insert(habit);
         habit.id = habitId;
@@ -44,6 +47,7 @@ public class ContextHabitJoinDaoTest extends BaseAndroidTest {
         long contextId = contextDao.insert(context);
         context.id = contextId;
 
+        repository.saveSchedule(createScheduleNoIdDaily());
         HabitEntity habit = createHabitNoId1();
         long habitId = habitDao.insert(habit);
         habit.id = habitId;
@@ -70,6 +74,8 @@ public class ContextHabitJoinDaoTest extends BaseAndroidTest {
         context1.id = contextId1;
         context2.id = contextId2;
         context3.id = contextId3;
+        repository.saveSchedule(createScheduleNoIdDaily());
+        repository.saveSchedule(createScheduleNoIdWeekly());
         HabitEntity habit1 = createHabitNoId1();
         HabitEntity habit2 = createHabitNoId2();
         long habitId1 = habitDao.insert(habit1);

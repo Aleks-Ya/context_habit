@@ -16,6 +16,7 @@ import ru.yaal.contexthabit.repo.room.action.ActionDao;
 import ru.yaal.contexthabit.repo.room.context.ContextDao;
 import ru.yaal.contexthabit.repo.room.context.ContextHabitJoinDao;
 import ru.yaal.contexthabit.repo.room.habit.HabitDao;
+import ru.yaal.contexthabit.repo.room.habit.ScheduleDao;
 
 @RunWith(AndroidJUnit4ClassRunner.class)
 public abstract class BaseAndroidTest {
@@ -23,6 +24,7 @@ public abstract class BaseAndroidTest {
     protected HabitDao habitDao;
     protected ActionDao actionDao;
     protected ContextHabitJoinDao contextHabitJoinDao;
+    protected ScheduleDao scheduleDao;
     protected Repository repository;
     private AppDatabase db;
 
@@ -34,7 +36,9 @@ public abstract class BaseAndroidTest {
         habitDao = db.habitDao();
         actionDao = db.actionDao();
         contextHabitJoinDao = db.contextHabitJoinDao();
-        repository = new RepositoryImpl(contextDao, habitDao, contextHabitJoinDao, actionDao);
+        scheduleDao = db.scheduleDao();
+        repository = new RepositoryImpl(contextDao, habitDao, contextHabitJoinDao, actionDao,
+                scheduleDao);
     }
 
     @After
