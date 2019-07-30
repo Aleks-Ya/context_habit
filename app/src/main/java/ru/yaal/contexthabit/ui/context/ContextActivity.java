@@ -20,11 +20,14 @@ import ru.yaal.contexthabit.android.R;
 import ru.yaal.contexthabit.repo.Repository;
 import ru.yaal.contexthabit.repo.RepositoryImpl;
 import ru.yaal.contexthabit.repo.room.AppDatabase;
+import ru.yaal.contexthabit.service.RenewService;
+import ru.yaal.contexthabit.service.RenewServiceImpl;
 
 public class ContextActivity extends AppCompatActivity {
     public static final String HABITS_EXTRA_NAME = "habits";
     public static final String CONTEXT_EXTRA_NAME = "context";
     public static Repository repository;
+    public static RenewService renewService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,8 @@ public class ContextActivity extends AppCompatActivity {
 
         repository = new RepositoryImpl(database.contextDao(), database.habitDao(),
                 database.contextHabitJoinDao(), database.actionDao(), database.scheduleDao());
+
+        renewService = new RenewServiceImpl(repository);
 
         RecyclerView.Adapter mAdapter = new ContextAdapter(repository.getAllContexts());
         contextRecyclerView.setAdapter(mAdapter);

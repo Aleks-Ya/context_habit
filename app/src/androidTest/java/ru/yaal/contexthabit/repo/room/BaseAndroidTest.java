@@ -17,6 +17,8 @@ import ru.yaal.contexthabit.repo.room.context.ContextDao;
 import ru.yaal.contexthabit.repo.room.context.ContextHabitJoinDao;
 import ru.yaal.contexthabit.repo.room.habit.HabitDao;
 import ru.yaal.contexthabit.repo.room.habit.ScheduleDao;
+import ru.yaal.contexthabit.service.RenewService;
+import ru.yaal.contexthabit.service.RenewServiceImpl;
 
 @RunWith(AndroidJUnit4ClassRunner.class)
 public abstract class BaseAndroidTest {
@@ -26,6 +28,7 @@ public abstract class BaseAndroidTest {
     protected ContextHabitJoinDao contextHabitJoinDao;
     protected ScheduleDao scheduleDao;
     protected Repository repository;
+    protected RenewService renewService;
     private AppDatabase db;
 
     @Before
@@ -39,6 +42,7 @@ public abstract class BaseAndroidTest {
         scheduleDao = db.scheduleDao();
         repository = new RepositoryImpl(contextDao, habitDao, contextHabitJoinDao, actionDao,
                 scheduleDao);
+        renewService = new RenewServiceImpl(repository);
     }
 
     @After

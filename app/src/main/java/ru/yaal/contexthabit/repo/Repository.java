@@ -25,4 +25,6 @@ public interface Repository {
     int getPositiveValue(long habitId);
 
     ScheduleEntity saveSchedule(ScheduleEntity scheduleEntity);
+
+    ScheduleEntity getSchedule(HabitEntity habitEntity);
 }

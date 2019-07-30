@@ -84,4 +84,9 @@ public class RepositoryImpl implements Repository {
         return scheduleEntity;
     }
 
+    @Override
+    public ScheduleEntity getSchedule(HabitEntity habitEntity) {
+        return scheduleDao.getById(habitEntity.scheduleId);
+    }
+
 }
