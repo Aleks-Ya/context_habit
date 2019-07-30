@@ -81,7 +81,15 @@
                 android:layout_weight="1"
                 android:minWidth="@dimen/habit_button_width_min"
                 android:text="@string/habit_positive_plus_button_name" />
+
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/next_renew_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TextView" />
     </LinearLayout>
 
 </ru.yaal.contexthabit.ui.habit.HabitView>

@@ -21,6 +21,7 @@ import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
 
 import static ru.yaal.contexthabit.repo.room.action.ActionEntity.ActionType.NEGATIVE;
 import static ru.yaal.contexthabit.repo.room.action.ActionEntity.ActionType.POSITIVE;
+import static ru.yaal.contexthabit.ui.context.ContextActivity.renewService;
 import static ru.yaal.contexthabit.ui.context.ContextActivity.repository;
 
 public class HabitViewAdapter extends RecyclerView.Adapter<HabitViewAdapter.HabitViewHolder> {
@@ -65,6 +66,7 @@ public class HabitViewAdapter extends RecyclerView.Adapter<HabitViewAdapter.Habi
 
         TextView negativeValueTextView = habitView.getNegativeValueTextView();
         TextView positiveValueTextView = habitView.getPositiveValueTextView();
+        TextView nextRenewTextView = habitView.getNextRenewTextView();
 
         model.negativeCount.observe(habitActivity,
                 new IntegerObserver(negativeValueTextView, negativeMinusButton));
@@ -81,6 +83,9 @@ public class HabitViewAdapter extends RecyclerView.Adapter<HabitViewAdapter.Habi
         addButtonListener(negativePlusButton, model, 1, NEGATIVE);
         addButtonListener(positiveMinusButton, model, -1, POSITIVE);
         addButtonListener(positivePlusButton, model, 1, POSITIVE);
+
+        model.nextRenew.observe(habitActivity, new NextRenewObserver(nextRenewTextView));
+        model.nextRenew.setValue(renewService.getNextHabitRenew(habit));
     }
 
     private void addButtonListener(Button button, HabitViewModel model, int valueChange,

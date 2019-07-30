@@ -86,6 +86,9 @@ public class RepositoryImpl implements Repository {
 
     @Override
     public ScheduleEntity getSchedule(HabitEntity habitEntity) {
+        if (habitEntity.scheduleId == null) {
+            return null;
+        }
         return scheduleDao.getById(habitEntity.scheduleId);
     }
 

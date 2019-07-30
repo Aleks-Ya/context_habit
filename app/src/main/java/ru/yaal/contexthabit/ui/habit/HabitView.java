@@ -42,4 +42,8 @@ public class HabitView extends ConstraintLayout {
         return findViewById(R.id.positiveValueTextView);
     }
 
+    public TextView getNextRenewTextView() {
+        return findViewById(R.id.next_renew_text_view);
+    }
+
 }
