@@ -50,6 +50,16 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
+    public List<HabitEntity> getAllHabits() {
+        return habitDao.getAll();
+    }
+
+    @Override
+    public List<HabitRenewEntity> getAllHabitRenews() {
+        return habitRenewDao.getAll();
+    }
+
+    @Override
     public void link(ContextEntity contextEntity, HabitEntity habitEntity) {
         contextHabitJoinDao.insert(createContextHabitJoin(contextEntity.id, habitEntity.id));
     }
@@ -99,7 +109,13 @@ public class RepositoryImpl implements Repository {
     @Override
     public HabitRenewEntity saveHabitRenew(HabitRenewEntity habitRenewEntity) {
         habitRenewEntity.id = habitRenewDao.insert(habitRenewEntity);
+        Log.i(getClass().getSimpleName(), "HabitRenewEntity is saved: " + habitRenewEntity);
         return habitRenewEntity;
+    }
+
+    @Override
+    public HabitRenewEntity getLastHabitRenew(HabitEntity habitEntity) {
+        return habitRenewDao.getLastRenewForHabit(habitEntity.id);
     }
 
 }

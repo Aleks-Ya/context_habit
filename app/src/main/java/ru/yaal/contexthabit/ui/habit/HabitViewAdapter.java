@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import ru.yaal.contexthabit.android.R;
@@ -21,8 +22,8 @@ import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
 
 import static ru.yaal.contexthabit.repo.room.action.ActionEntity.ActionType.NEGATIVE;
 import static ru.yaal.contexthabit.repo.room.action.ActionEntity.ActionType.POSITIVE;
-import static ru.yaal.contexthabit.ui.context.ContextActivity.renewService;
-import static ru.yaal.contexthabit.ui.context.ContextActivity.repository;
+import static ru.yaal.contexthabit.service.Singleton.renewService;
+import static ru.yaal.contexthabit.service.Singleton.repository;
 
 public class HabitViewAdapter extends RecyclerView.Adapter<HabitViewAdapter.HabitViewHolder> {
     private ContextEntity context;
@@ -85,7 +86,7 @@ public class HabitViewAdapter extends RecyclerView.Adapter<HabitViewAdapter.Habi
         addButtonListener(positivePlusButton, model, 1, POSITIVE);
 
         model.nextRenew.observe(habitActivity, new NextRenewObserver(nextRenewTextView));
-        model.nextRenew.setValue(renewService.getNextHabitRenew(habit));
+        model.nextRenew.setValue(renewService.getNextHabitRenew(habit, ZonedDateTime.now()));
     }
 
     private void addButtonListener(Button button, HabitViewModel model, int valueChange,

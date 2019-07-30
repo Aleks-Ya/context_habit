@@ -10,24 +10,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.concurrent.TimeUnit;
 
 import ru.yaal.contexthabit.android.R;
-import ru.yaal.contexthabit.repo.Repository;
 import ru.yaal.contexthabit.repo.RepositoryImpl;
 import ru.yaal.contexthabit.repo.room.AppDatabase;
-import ru.yaal.contexthabit.service.RenewService;
+import ru.yaal.contexthabit.service.HabitRenewWorker;
 import ru.yaal.contexthabit.service.RenewServiceImpl;
+import ru.yaal.contexthabit.service.Singleton;
+
+import static ru.yaal.contexthabit.service.Singleton.repository;
 
 public class ContextActivity extends AppCompatActivity {
     public static final String HABITS_EXTRA_NAME = "habits";
     public static final String CONTEXT_EXTRA_NAME = "context";
-    public static Repository repository;
-    public static RenewService renewService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +51,20 @@ public class ContextActivity extends AppCompatActivity {
                 database.contextHabitJoinDao(), database.actionDao(), database.scheduleDao(),
                 database.habitRenewDao());
 
-        renewService = new RenewServiceImpl(repository);
+        Singleton.renewService = new RenewServiceImpl(repository);
 
         RecyclerView.Adapter mAdapter = new ContextAdapter(repository.getAllContexts());
         contextRecyclerView.setAdapter(mAdapter);
+
+        WorkManager workManager = WorkManager.getInstance(getApplicationContext());
+        runHabitRenewWorker(workManager);
+    }
+
+    private void runHabitRenewWorker(WorkManager workManager) {
+        PeriodicWorkRequest request = new PeriodicWorkRequest
+                .Builder(HabitRenewWorker.class, 1, TimeUnit.MINUTES)
+                .build();
+        workManager.enqueue(request);
     }
 
     private class PopulateDatabaseCallback extends RoomDatabase.Callback {

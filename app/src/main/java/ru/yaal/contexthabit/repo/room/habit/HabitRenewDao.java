@@ -16,8 +16,12 @@ public interface HabitRenewDao {
     @Query("SELECT * FROM HabitRenewEntity WHERE id = :habitRenewId")
     HabitRenewEntity getById(long habitRenewId);
 
+    @Query("SELECT * FROM HabitRenewEntity WHERE habitId = :habitId ORDER BY date DESC LIMIT 1")
+    HabitRenewEntity getLastRenewForHabit(Long habitId);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(HabitRenewEntity habitRenewEntity);
+
 
     @Delete
     void delete(HabitRenewEntity habitRenewEntity);

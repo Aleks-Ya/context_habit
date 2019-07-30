@@ -20,12 +20,11 @@ public class RenewServiceImpl implements RenewService {
 
     @Override
     @SneakyThrows
-    public LocalDateTime getNextHabitRenew(HabitEntity habit) {
+    public LocalDateTime getNextHabitRenew(HabitEntity habit, ZonedDateTime now) {
         ScheduleEntity schedule = repository.getSchedule(habit);
         if (schedule == null) {
             return null;
         }
-        ZonedDateTime now = ZonedDateTime.now();
         ExecutionTime executionTime = ExecutionTime.forCron(schedule.cron);
         Optional<ZonedDateTime> nextExecutionOpt = executionTime.nextExecution(now);
         if (!nextExecutionOpt.isPresent()) {

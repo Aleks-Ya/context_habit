@@ -13,6 +13,10 @@ public interface Repository {
 
     HabitEntity saveHabit(HabitEntity habitEntity);
 
+    List<HabitEntity> getAllHabits();
+
+    List<HabitRenewEntity> getAllHabitRenews();
+
     void link(ContextEntity contextEntity, HabitEntity habitEntity);
 
     List<ContextEntity> getAllContexts();
@@ -30,4 +34,6 @@ public interface Repository {
     ScheduleEntity getSchedule(HabitEntity habitEntity);
 
     HabitRenewEntity saveHabitRenew(HabitRenewEntity habitRenewEntity);
+
+    HabitRenewEntity getLastHabitRenew(HabitEntity habitEntity);
 }

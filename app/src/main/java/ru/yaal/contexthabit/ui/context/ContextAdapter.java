@@ -15,6 +15,7 @@ import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
 import ru.yaal.contexthabit.ui.habit.HabitActivity;
 import ru.yaal.contexthabit.ui.habit.HabitList;
 
+import static ru.yaal.contexthabit.service.Singleton.repository;
 import static ru.yaal.contexthabit.ui.context.ContextActivity.CONTEXT_EXTRA_NAME;
 import static ru.yaal.contexthabit.ui.context.ContextActivity.HABITS_EXTRA_NAME;
 
@@ -45,7 +46,7 @@ public class ContextAdapter extends RecyclerView.Adapter<ContextAdapter.ContextV
     public void onBindViewHolder(@NonNull ContextViewHolder holder, int position) {
         ContextEntity context = dataSet.get(position);
         holder.view.setText(context.name);
-        List<HabitEntity> habits = ContextActivity.repository.getHabitsForContext(context);
+        List<HabitEntity> habits = repository.getHabitsForContext(context);
         holder.view.setOnClickListener(new ContextButtonOnClickListener(context, habits));
 
     }
