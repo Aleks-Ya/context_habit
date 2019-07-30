@@ -45,7 +45,8 @@ public class ContextActivity extends AppCompatActivity {
                 .build();
 
         repository = new RepositoryImpl(database.contextDao(), database.habitDao(),
-                database.contextHabitJoinDao(), database.actionDao(), database.scheduleDao());
+                database.contextHabitJoinDao(), database.actionDao(), database.scheduleDao(),
+                database.habitRenewDao());
 
         renewService = new RenewServiceImpl(repository);
 

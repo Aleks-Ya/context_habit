@@ -1,10 +1,14 @@
 package ru.yaal.contexthabit.repo.room;
 
+import java.time.LocalDateTime;
+
 import ru.yaal.contexthabit.repo.room.context.ContextEntity;
 import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
+import ru.yaal.contexthabit.repo.room.habit.HabitRenewEntity;
 import ru.yaal.contexthabit.repo.room.habit.ScheduleEntity;
 
 import static ru.yaal.contexthabit.repo.room.EntityBuilder.createHabit;
+import static ru.yaal.contexthabit.repo.room.EntityBuilder.createHabitRenewEntity;
 import static ru.yaal.contexthabit.repo.room.EntityBuilder.createScheduleEntity;
 import static ru.yaal.contexthabit.repo.room.context.ContextEntity.emptyContext;
 
@@ -38,5 +42,10 @@ public class TestData {
 
     public static ScheduleEntity createScheduleNoIdWeekly() {
         return createScheduleEntity(weeklyScheduleId, "Weekly", "0 4 * * 1");
+    }
+
+    public static HabitRenewEntity createHabitRenewNoId1() {
+        return createHabitRenewEntity(1L, dailyScheduleId,
+                LocalDateTime.of(2019, 10, 21, 22, 35));
     }
 }

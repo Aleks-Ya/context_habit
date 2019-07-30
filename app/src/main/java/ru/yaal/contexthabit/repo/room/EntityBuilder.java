@@ -1,9 +1,12 @@
 package ru.yaal.contexthabit.repo.room;
 
+import java.time.LocalDateTime;
+
 import ru.yaal.contexthabit.repo.room.context.ContextEntity;
 import ru.yaal.contexthabit.repo.room.context.ContextHabitJoin;
 import ru.yaal.contexthabit.repo.room.converter.CronConverters;
 import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
+import ru.yaal.contexthabit.repo.room.habit.HabitRenewEntity;
 import ru.yaal.contexthabit.repo.room.habit.ScheduleEntity;
 
 public class EntityBuilder {
@@ -34,11 +37,19 @@ public class EntityBuilder {
     }
 
     public static ScheduleEntity createScheduleEntity(Long scheduleId, String name, String cron) {
-        ScheduleEntity join = new ScheduleEntity();
-        join.id = scheduleId;
-        join.name = name;
-        join.cron = cronConverter.fromString(cron);
-        return join;
+        ScheduleEntity schedule = new ScheduleEntity();
+        schedule.id = scheduleId;
+        schedule.name = name;
+        schedule.cron = cronConverter.fromString(cron);
+        return schedule;
+    }
+
+    public static HabitRenewEntity createHabitRenewEntity(Long habitId, Long scheduleId, LocalDateTime date) {
+        HabitRenewEntity habitRenew = new HabitRenewEntity();
+        habitRenew.habitId = habitId;
+        habitRenew.scheduleId = scheduleId;
+        habitRenew.date = date;
+        return habitRenew;
     }
 
 }

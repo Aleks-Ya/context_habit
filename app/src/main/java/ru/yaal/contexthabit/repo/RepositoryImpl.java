@@ -11,6 +11,8 @@ import ru.yaal.contexthabit.repo.room.context.ContextEntity;
 import ru.yaal.contexthabit.repo.room.context.ContextHabitJoinDao;
 import ru.yaal.contexthabit.repo.room.habit.HabitDao;
 import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
+import ru.yaal.contexthabit.repo.room.habit.HabitRenewDao;
+import ru.yaal.contexthabit.repo.room.habit.HabitRenewEntity;
 import ru.yaal.contexthabit.repo.room.habit.ScheduleDao;
 import ru.yaal.contexthabit.repo.room.habit.ScheduleEntity;
 
@@ -22,15 +24,17 @@ public class RepositoryImpl implements Repository {
     private final ContextHabitJoinDao contextHabitJoinDao;
     private final ActionDao actionDao;
     private final ScheduleDao scheduleDao;
+    private final HabitRenewDao habitRenewDao;
 
     public RepositoryImpl(ContextDao contextDao, HabitDao habitDao,
                           ContextHabitJoinDao contextHabitJoinDao, ActionDao actionDao,
-                          ScheduleDao scheduleDao) {
+                          ScheduleDao scheduleDao, HabitRenewDao habitRenewDao) {
         this.contextDao = contextDao;
         this.habitDao = habitDao;
         this.contextHabitJoinDao = contextHabitJoinDao;
         this.actionDao = actionDao;
         this.scheduleDao = scheduleDao;
+        this.habitRenewDao = habitRenewDao;
     }
 
     @Override
@@ -90,6 +94,12 @@ public class RepositoryImpl implements Repository {
             return null;
         }
         return scheduleDao.getById(habitEntity.scheduleId);
+    }
+
+    @Override
+    public HabitRenewEntity saveHabitRenew(HabitRenewEntity habitRenewEntity) {
+        habitRenewEntity.id = habitRenewDao.insert(habitRenewEntity);
+        return habitRenewEntity;
     }
 
 }
