@@ -58,11 +58,18 @@ public class HabitViewAdapter extends RecyclerView.Adapter<HabitViewAdapter.Habi
         HabitEntityObserver habitEntityObserver = new HabitEntityObserver(habitNameTextView);
         model.habitEntity.observe(habitActivity, habitEntityObserver);
 
-        TextView negativeValueTextView = habitView.getNegativeValueTextView();
-        model.negativeCount.observe(habitActivity, new IntegerObserver(negativeValueTextView));
+        Button negativeMinusButton = habitView.getNegativeMinusButton();
+        Button negativePlusButton = habitView.getNegativePlusButton();
+        Button positiveMinusButton = habitView.getPositiveMinusButton();
+        Button positivePlusButton = habitView.getPositivePlusButton();
 
+        TextView negativeValueTextView = habitView.getNegativeValueTextView();
         TextView positiveValueTextView = habitView.getPositiveValueTextView();
-        model.positiveCount.observe(habitActivity, new IntegerObserver(positiveValueTextView));
+
+        model.negativeCount.observe(habitActivity,
+                new IntegerObserver(negativeValueTextView, negativeMinusButton));
+        model.positiveCount.observe(habitActivity,
+                new IntegerObserver(positiveValueTextView, positiveMinusButton));
 
         HabitEntity habit = habits.get(position);
         model.contextEntity.setValue(context);
@@ -70,10 +77,10 @@ public class HabitViewAdapter extends RecyclerView.Adapter<HabitViewAdapter.Habi
         model.negativeCount.setValue(repository.getNegativeValue(habit.id));
         model.positiveCount.setValue(repository.getPositiveValue(habit.id));
 
-        addButtonListener(habitView.getNegativeMinusButton(), model, -1, NEGATIVE);
-        addButtonListener(habitView.getNegativePlusButton(), model, 1, NEGATIVE);
-        addButtonListener(habitView.getPositiveMinusButton(), model, -1, POSITIVE);
-        addButtonListener(habitView.getPositivePlusButton(), model, 1, POSITIVE);
+        addButtonListener(negativeMinusButton, model, -1, NEGATIVE);
+        addButtonListener(negativePlusButton, model, 1, NEGATIVE);
+        addButtonListener(positiveMinusButton, model, -1, POSITIVE);
+        addButtonListener(positivePlusButton, model, 1, POSITIVE);
     }
 
     private void addButtonListener(Button button, HabitViewModel model, int valueChange,
