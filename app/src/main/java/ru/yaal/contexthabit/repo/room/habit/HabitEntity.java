@@ -24,5 +24,7 @@ public class HabitEntity implements Serializable {
     @ColumnInfo
     public Long scheduleId;
 
+    @ColumnInfo
+    public Integer targetValue;
 }
 

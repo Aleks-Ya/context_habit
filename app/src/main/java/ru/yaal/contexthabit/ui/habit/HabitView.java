@@ -3,6 +3,7 @@ package ru.yaal.contexthabit.ui.habit;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -44,6 +45,14 @@ public class HabitView extends ConstraintLayout {
 
     public TextView getNextRenewTextView() {
         return findViewById(R.id.next_renew_text_view);
+    }
+
+    public ProgressBar getProgressBar() {
+        return findViewById(R.id.habit_progress_bar);
+    }
+
+    public TextView getProgressTextView() {
+        return findViewById(R.id.progress_text_view);
     }
 
 }

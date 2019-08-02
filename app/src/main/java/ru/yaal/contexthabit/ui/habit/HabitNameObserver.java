@@ -6,10 +6,10 @@ import androidx.lifecycle.Observer;
 
 import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
 
-public class HabitEntityObserver implements Observer<HabitEntity> {
+public class HabitNameObserver implements Observer<HabitEntity> {
     private final TextView textView;
 
-    HabitEntityObserver(TextView textView) {
+    HabitNameObserver(TextView textView) {
         this.textView = textView;
     }
 

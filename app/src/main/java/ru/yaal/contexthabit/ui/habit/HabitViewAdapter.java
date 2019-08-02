@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,11 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Locale;
 
 import ru.yaal.contexthabit.android.R;
 import ru.yaal.contexthabit.repo.room.action.ActionEntity;
 import ru.yaal.contexthabit.repo.room.context.ContextEntity;
 import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
+import ru.yaal.contexthabit.repo.room.habit.HabitRenewEntity;
 
 import static ru.yaal.contexthabit.repo.room.action.ActionEntity.ActionType.NEGATIVE;
 import static ru.yaal.contexthabit.repo.room.action.ActionEntity.ActionType.POSITIVE;
@@ -57,8 +60,8 @@ public class HabitViewAdapter extends RecyclerView.Adapter<HabitViewAdapter.Habi
         HabitViewModel model = new HabitViewModel();
 
         TextView habitNameTextView = habitView.getHabitNameTextView();
-        HabitEntityObserver habitEntityObserver = new HabitEntityObserver(habitNameTextView);
-        model.habitEntity.observe(habitActivity, habitEntityObserver);
+        HabitNameObserver habitNameObserver = new HabitNameObserver(habitNameTextView);
+        model.habitEntity.observe(habitActivity, habitNameObserver);
 
         Button negativeMinusButton = habitView.getNegativeMinusButton();
         Button negativePlusButton = habitView.getNegativePlusButton();
@@ -70,16 +73,9 @@ public class HabitViewAdapter extends RecyclerView.Adapter<HabitViewAdapter.Habi
         TextView nextRenewTextView = habitView.getNextRenewTextView();
 
         model.negativeCount.observe(habitActivity,
-                new IntegerObserver(negativeValueTextView, negativeMinusButton));
+                new ValueButtonObserver(negativeValueTextView, negativeMinusButton));
         model.positiveCount.observe(habitActivity,
-                new IntegerObserver(positiveValueTextView, positiveMinusButton));
-
-        LocalDateTime lastRenewDate = LocalDateTime.now();
-        HabitEntity habit = habits.get(position);
-        model.contextEntity.setValue(context);
-        model.habitEntity.setValue(habit);
-        model.negativeCount.setValue(repository.getNegativeValue(habit.id, lastRenewDate));
-        model.positiveCount.setValue(repository.getPositiveValue(habit.id, lastRenewDate));
+                new ValueButtonObserver(positiveValueTextView, positiveMinusButton));
 
         addButtonListener(negativeMinusButton, model, -1, NEGATIVE);
         addButtonListener(negativePlusButton, model, 1, NEGATIVE);
@@ -87,7 +83,25 @@ public class HabitViewAdapter extends RecyclerView.Adapter<HabitViewAdapter.Habi
         addButtonListener(positivePlusButton, model, 1, POSITIVE);
 
         model.nextRenew.observe(habitActivity, new NextRenewObserver(nextRenewTextView));
+
+        ProgressBar progressBar = habitView.getProgressBar();
+        TextView progressTextView = habitView.getProgressTextView();
+        model.progress.observe(habitActivity, new ProgressBarValueObserver(progressBar));
+        model.progressStr.observe(habitActivity, new ProgressTextViewObserver(progressTextView));
+        model.habitEntity.observe(habitActivity, new ProgressBarHabitObserver(progressBar));
+
+        HabitEntity habit = habits.get(position);
+        HabitRenewEntity lastHabitRenew = repository.getLastHabitRenew(habit);
+        LocalDateTime lastRenewDate = lastHabitRenew != null ? lastHabitRenew.date : LocalDateTime.now();
+        int positiveValue = repository.getPositiveValue(habit.id, lastRenewDate);
+        int negativeValue = repository.getNegativeValue(habit.id, lastRenewDate);
+        model.contextEntity.setValue(context);
+        model.habitEntity.setValue(habit);
+        model.negativeCount.setValue(negativeValue);
+        model.positiveCount.setValue(positiveValue);
         model.nextRenew.setValue(renewService.getNextHabitRenew(habit, ZonedDateTime.now()));
+        model.progress.setValue(positiveValue - negativeValue);
+        model.progressStr.setValue(formatProgressStr(positiveValue - negativeValue, habit.targetValue));
     }
 
     private void addButtonListener(Button button, HabitViewModel model, int valueChange,
@@ -135,6 +149,22 @@ public class HabitViewAdapter extends RecyclerView.Adapter<HabitViewAdapter.Habi
                 default:
                     throw new RuntimeException("Unknown ActionType: " + type);
             }
+
+            updateProgress(model);
+        }
+
+        private static void updateProgress(HabitViewModel model) {
+            Integer positiveCount = model.positiveCount.getValue();
+            int posCount = positiveCount != null ? positiveCount : 0;
+            Integer negativeCount = model.negativeCount.getValue();
+            int negCount = negativeCount != null ? negativeCount : 0;
+            Integer progress = posCount - negCount;
+            model.progress.setValue(progress);
+
+            HabitEntity targetValue = model.habitEntity.getValue();
+            int tarValue = targetValue != null ? targetValue.targetValue : 0;
+            String progressStr = formatProgressStr(progress, tarValue);
+            model.progressStr.setValue(progressStr);
         }
 
         private void updateValue(MutableLiveData<Integer> liveData, int valueChange) {
@@ -143,5 +173,9 @@ public class HabitViewAdapter extends RecyclerView.Adapter<HabitViewAdapter.Habi
             int newValue = value + valueChange;
             liveData.setValue(newValue);
         }
+    }
+
+    private static String formatProgressStr(Integer progress, int tarValue) {
+        return String.format(Locale.getDefault(), "%d/%d", progress, tarValue);
     }
 }

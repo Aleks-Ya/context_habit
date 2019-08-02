@@ -14,4 +14,6 @@ class HabitViewModel extends ViewModel {
     final MutableLiveData<Integer> negativeCount = new MutableLiveData<>();
     final MutableLiveData<Integer> positiveCount = new MutableLiveData<>();
     final MutableLiveData<LocalDateTime> nextRenew = new MutableLiveData<>();
+    final MutableLiveData<Integer> progress = new MutableLiveData<>();
+    final MutableLiveData<String> progressStr = new MutableLiveData<>();
 }

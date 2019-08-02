@@ -7,12 +7,12 @@ import androidx.lifecycle.Observer;
 
 import java.util.Locale;
 
-public class IntegerObserver implements Observer<Integer> {
+public class ValueButtonObserver implements Observer<Integer> {
     private static final int MINIMAL_VALUE = 0;
     private final TextView textView;
     private final Button minusButton;
 
-    IntegerObserver(TextView textView, Button minusButton) {
+    ValueButtonObserver(TextView textView, Button minusButton) {
         this.textView = textView;
         this.minusButton = minusButton;
     }
