@@ -35,8 +35,6 @@ public class HabitRenewWorkerTest extends BaseAndroidTest {
 
         assertThat(repository.getAllHabitRenews(), empty());
 
-        Thread.sleep(2000);
-
         OneTimeWorkRequest uploadWorkRequest = new OneTimeWorkRequest.Builder(HabitRenewWorker.class).build();
         Operation operation = workManager.enqueue(uploadWorkRequest);
         Operation.State state = operation.getResult().get();

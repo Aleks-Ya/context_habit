@@ -1,5 +1,6 @@
 package ru.yaal.contexthabit.repo;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import ru.yaal.contexthabit.repo.room.action.ActionEntity;
@@ -25,9 +26,9 @@ public interface Repository {
 
     ActionEntity saveAction(ActionEntity actionEntity);
 
-    int getNegativeValue(long habitId);
+    int getNegativeValue(long habitId, LocalDateTime lastRenewDate);
 
-    int getPositiveValue(long habitId);
+    int getPositiveValue(long habitId, LocalDateTime lastRenewDate);
 
     ScheduleEntity saveSchedule(ScheduleEntity scheduleEntity);
 

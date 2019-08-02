@@ -74,11 +74,12 @@ public class HabitViewAdapter extends RecyclerView.Adapter<HabitViewAdapter.Habi
         model.positiveCount.observe(habitActivity,
                 new IntegerObserver(positiveValueTextView, positiveMinusButton));
 
+        LocalDateTime lastRenewDate = LocalDateTime.now();
         HabitEntity habit = habits.get(position);
         model.contextEntity.setValue(context);
         model.habitEntity.setValue(habit);
-        model.negativeCount.setValue(repository.getNegativeValue(habit.id));
-        model.positiveCount.setValue(repository.getPositiveValue(habit.id));
+        model.negativeCount.setValue(repository.getNegativeValue(habit.id, lastRenewDate));
+        model.positiveCount.setValue(repository.getPositiveValue(habit.id, lastRenewDate));
 
         addButtonListener(negativeMinusButton, model, -1, NEGATIVE);
         addButtonListener(negativePlusButton, model, 1, NEGATIVE);

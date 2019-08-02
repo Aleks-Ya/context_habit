@@ -2,6 +2,7 @@ package ru.yaal.contexthabit.repo;
 
 import android.util.Log;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import ru.yaal.contexthabit.repo.room.action.ActionDao;
@@ -83,13 +84,13 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
-    public int getNegativeValue(long habitId) {
-        return actionDao.getNegativeValue(habitId);
+    public int getNegativeValue(long habitId, LocalDateTime lastRenewDate) {
+        return actionDao.getNegativeValue(habitId, lastRenewDate);
     }
 
     @Override
-    public int getPositiveValue(long habitId) {
-        return actionDao.getPositiveValue(habitId);
+    public int getPositiveValue(long habitId, LocalDateTime lastRenewDate) {
+        return actionDao.getPositiveValue(habitId, lastRenewDate);
     }
 
     @Override
