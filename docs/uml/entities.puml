@@ -1,0 +1,69 @@
+@startuml
+
+package context {
+    class ContextEntity {
+        Long id
+        String name
+        Long parentContextId
+    }
+
+    class ContextHabitJoin {
+        long contextId
+        long habitId
+        long order
+    }
+}
+
+package habit {
+    class HabitEntity {
+        Long id
+        String name
+        Long scheduleId
+        Integer targetValue
+    }
+
+    class HabitRenewEntity {
+        Long id
+        Long habitId
+        Long scheduleId
+        LocalDateTime date
+    }
+
+    class ScheduleEntity {
+        Long id
+        String name
+        Cron cron
+    }
+}
+
+package action {
+    class ActionEntity {
+        Long id
+        Long contextId
+        Long habitId
+        LocalDateTime date
+        ActionType type
+        Integer valueChange
+    }
+    enum ActionType {
+        POSITIVE
+        NEGATIVE
+    }
+}
+
+ContextEntity --> ContextEntity
+
+HabitEntity --> ScheduleEntity
+
+ContextHabitJoin --> ContextEntity
+ContextHabitJoin --> HabitEntity
+
+ActionEntity --> ContextEntity
+ActionEntity --> HabitEntity
+ActionEntity --> ActionType
+
+HabitRenewEntity --> HabitEntity
+HabitRenewEntity --> ScheduleEntity
+
+@enduml
+
