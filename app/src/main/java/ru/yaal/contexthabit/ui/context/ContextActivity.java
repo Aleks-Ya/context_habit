@@ -29,7 +29,6 @@ import ru.yaal.contexthabit.service.Singleton;
 import static ru.yaal.contexthabit.service.Singleton.repository;
 
 public class ContextActivity extends AppCompatActivity {
-    public static final String HABITS_EXTRA_NAME = "habits";
     public static final String CONTEXT_EXTRA_NAME = "context";
 
     @Override
@@ -53,7 +52,7 @@ public class ContextActivity extends AppCompatActivity {
 
         Singleton.renewService = new RenewServiceImpl(repository);
 
-        RecyclerView.Adapter mAdapter = new ContextAdapter(repository.getAllContexts());
+        RecyclerView.Adapter mAdapter = new ContextViewAdapter(repository.getAllContexts());
         contextRecyclerView.setAdapter(mAdapter);
 
         WorkManager workManager = WorkManager.getInstance(getApplicationContext());

@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer;
 
 import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
 
-public class ProgressBarHabitObserver implements Observer<HabitEntity> {
+class ProgressBarHabitObserver implements Observer<HabitEntity> {
 
     private final ProgressBar progressBar;
 

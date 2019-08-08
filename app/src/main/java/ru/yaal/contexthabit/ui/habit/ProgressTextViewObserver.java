@@ -4,7 +4,7 @@ import android.widget.TextView;
 
 import androidx.lifecycle.Observer;
 
-public class ProgressTextViewObserver implements Observer<String> {
+class ProgressTextViewObserver implements Observer<String> {
 
     private final TextView progressTextView;
 

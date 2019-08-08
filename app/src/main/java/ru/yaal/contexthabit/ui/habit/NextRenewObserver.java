@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class NextRenewObserver implements Observer<LocalDateTime> {
+class NextRenewObserver implements Observer<LocalDateTime> {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy E HH:mm");
     private final TextView textView;
 

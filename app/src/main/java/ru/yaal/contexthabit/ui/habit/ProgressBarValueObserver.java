@@ -4,7 +4,7 @@ import android.widget.ProgressBar;
 
 import androidx.lifecycle.Observer;
 
-public class ProgressBarValueObserver implements Observer<Integer> {
+class ProgressBarValueObserver implements Observer<Integer> {
 
     private final ProgressBar progressBar;
 
