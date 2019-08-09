@@ -28,7 +28,7 @@ public class HabitDaoTest extends BaseAndroidTest {
 
     @Test
     public void deleteHabit() {
-        repository.saveSchedule(createScheduleNoIdDaily());
+        repo.saveSchedule(createScheduleNoIdDaily());
         HabitEntity habit1 = createHabitNoId1();
         long habitId = habitDao.insert(habit1);
         habit1.id = habitId;
@@ -40,11 +40,11 @@ public class HabitDaoTest extends BaseAndroidTest {
 
     @Test
     public void getAllHabits() {
-        repository.saveSchedule(createScheduleNoIdDaily());
+        repo.saveSchedule(createScheduleNoIdDaily());
         HabitEntity habit1 = createHabitNoId1();
         habit1.id = habitDao.insert(habit1);
 
-        repository.saveSchedule(createScheduleNoIdWeekly());
+        repo.saveSchedule(createScheduleNoIdWeekly());
         HabitEntity habit2 = createHabitNoId1();
         habit2.id = habitDao.insert(habit2);
 

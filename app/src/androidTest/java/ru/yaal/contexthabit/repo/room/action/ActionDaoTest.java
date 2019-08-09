@@ -65,8 +65,8 @@ public class ActionDaoTest extends BaseAndroidTest {
     public void getNegativeValue() {
         long contextId = 1L;
 
-        ScheduleEntity schedule = repository.saveSchedule(createScheduleNoIdDaily());
-        HabitEntity habit = repository.saveHabit(createHabitNoId1());
+        ScheduleEntity schedule = repo.saveSchedule(createScheduleNoIdDaily());
+        HabitEntity habit = repo.saveHabit(createHabitNoId1());
         long habitId = habit.id;
 
         LocalDateTime lastRenewDate = LocalDateTime.now();
@@ -123,7 +123,7 @@ public class ActionDaoTest extends BaseAndroidTest {
         renewEntity.habitId = habitId;
         renewEntity.date = LocalDateTime.now();
         renewEntity.scheduleId = schedule.id;
-        repository.saveHabitRenew(renewEntity);
+        repo.saveHabitRenew(renewEntity);
 
         lastRenewDate = lastRenewDate.plusMinutes(2);
 

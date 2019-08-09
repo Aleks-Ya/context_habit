@@ -18,8 +18,8 @@ public class RenewServiceImplTest extends BaseAndroidTest {
 
     @Test
     public void getNextHabitRenew() {
-        repository.saveSchedule(createScheduleNoIdDaily());
-        HabitEntity habit = repository.saveHabit(createHabitNoId1());
+        repo.saveSchedule(createScheduleNoIdDaily());
+        HabitEntity habit = repo.saveHabit(createHabitNoId1());
         LocalDateTime localDateTimeNow = LocalDateTime.of(2019, 10, 21, 22, 35);
         ZonedDateTime now = localDateTimeNow.atZone(ZoneId.systemDefault());
         LocalDateTime actNextHabitRenew = renewService.getNextHabitRenew(habit, now);

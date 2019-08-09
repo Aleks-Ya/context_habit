@@ -35,7 +35,7 @@ public abstract class BaseAndroidTest {
     protected ActionDao actionDao;
     protected ContextHabitJoinDao contextHabitJoinDao;
     protected ScheduleDao scheduleDao;
-    protected Repository repository;
+    protected Repository repo;
     protected RenewService renewService;
     protected HabitRenewDao habitRenewDao;
     protected WorkManager workManager;
@@ -51,11 +51,11 @@ public abstract class BaseAndroidTest {
         contextHabitJoinDao = db.contextHabitJoinDao();
         scheduleDao = db.scheduleDao();
         habitRenewDao = db.habitRenewDao();
-        repository = new RepositoryImpl(contextDao, habitDao, contextHabitJoinDao, actionDao,
+        repo = new RepositoryImpl(contextDao, habitDao, contextHabitJoinDao, actionDao,
                 scheduleDao, habitRenewDao);
-        renewService = new RenewServiceImpl(repository);
+        renewService = new RenewServiceImpl(repo);
         workManager = initWorkManager(context);
-        Singleton.repository = repository;
+        Singleton.repository = repo;
         Singleton.renewService = renewService;
     }
 

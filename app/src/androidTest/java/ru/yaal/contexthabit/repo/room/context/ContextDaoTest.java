@@ -48,18 +48,18 @@ public class ContextDaoTest extends BaseAndroidTest {
 
     @Test
     public void getRootContexts() {
-        ContextEntity context1 = repository.saveContext(createContext("Eat", emptyContext.id));
-        ContextEntity context2 = repository.saveContext(createContext("Eat", emptyContext.id));
-        repository.saveContext(createContext("Eat", context1.id));
+        ContextEntity context1 = repo.saveContext(createContext("Eat", emptyContext.id));
+        ContextEntity context2 = repo.saveContext(createContext("Eat", emptyContext.id));
+        repo.saveContext(createContext("Eat", context1.id));
         assertThat(contextDao.getRootContexts(), containsInAnyOrder(context1, context2));
     }
 
     @Test
     public void getNestedContexts() {
-        ContextEntity rootContext1 = repository.saveContext(createContext("Root1", emptyContext.id));
-        ContextEntity nestedContext1 = repository.saveContext(createContext("Nested1", rootContext1.id));
-        ContextEntity nestedContext2 = repository.saveContext(createContext("Nested2", rootContext1.id));
-        ContextEntity rootContext2 = repository.saveContext(createContext("Root2", emptyContext.id));
+        ContextEntity rootContext1 = repo.saveContext(createContext("Root1", emptyContext.id));
+        ContextEntity nestedContext1 = repo.saveContext(createContext("Nested1", rootContext1.id));
+        ContextEntity nestedContext2 = repo.saveContext(createContext("Nested2", rootContext1.id));
+        ContextEntity rootContext2 = repo.saveContext(createContext("Root2", emptyContext.id));
         assertThat(contextDao.getRootContexts(), containsInAnyOrder(rootContext1, rootContext2));
         assertThat(contextDao.getNestedContexts(rootContext1.id),
                 containsInAnyOrder(nestedContext1, nestedContext2));

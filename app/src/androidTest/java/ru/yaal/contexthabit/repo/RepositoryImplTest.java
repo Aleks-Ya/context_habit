@@ -21,38 +21,38 @@ public class RepositoryImplTest extends BaseAndroidTest {
 
     @Test
     public void saveContext() {
-        assertThat(repository.getAllContexts(), is(empty()));
+        assertThat(repo.getAllContexts(), is(empty()));
 
-        ContextEntity context1 = repository.saveContext(createContextNoId1());
-        ContextEntity context2 = repository.saveContext(createContextNoId2());
-        assertThat(repository.getAllContexts(), containsInAnyOrder(context1, context2));
+        ContextEntity context1 = repo.saveContext(createContextNoId1());
+        ContextEntity context2 = repo.saveContext(createContextNoId2());
+        assertThat(repo.getAllContexts(), containsInAnyOrder(context1, context2));
     }
 
     @Test
     public void saveHabit() {
         assertThat(habitDao.getAll(), is(empty()));
 
-        repository.saveSchedule(createScheduleNoIdDaily());
-        repository.saveSchedule(createScheduleNoIdWeekly());
-        HabitEntity habit1 = repository.saveHabit(createHabitNoId1());
-        HabitEntity habit2 = repository.saveHabit(createHabitNoId2());
+        repo.saveSchedule(createScheduleNoIdDaily());
+        repo.saveSchedule(createScheduleNoIdWeekly());
+        HabitEntity habit1 = repo.saveHabit(createHabitNoId1());
+        HabitEntity habit2 = repo.saveHabit(createHabitNoId2());
         assertThat(habitDao.getAll(), containsInAnyOrder(habit1, habit2));
     }
 
     @Test
     public void link() {
-        repository.saveSchedule(createScheduleNoIdDaily());
-        repository.saveSchedule(createScheduleNoIdWeekly());
+        repo.saveSchedule(createScheduleNoIdDaily());
+        repo.saveSchedule(createScheduleNoIdWeekly());
 
-        ContextEntity context1 = repository.saveContext(createContextNoId1());
-        HabitEntity habit1 = repository.saveHabit(createHabitNoId1());
-        HabitEntity habit2 = repository.saveHabit(createHabitNoId2());
+        ContextEntity context1 = repo.saveContext(createContextNoId1());
+        HabitEntity habit1 = repo.saveHabit(createHabitNoId1());
+        HabitEntity habit2 = repo.saveHabit(createHabitNoId2());
 
-        assertThat(repository.getHabitsForContext(context1), is(empty()));
+        assertThat(repo.getHabitsForContext(context1), is(empty()));
 
-        repository.link(context1, habit1);
-        repository.link(context1, habit2);
+        repo.link(context1, habit1);
+        repo.link(context1, habit2);
 
-        assertThat(repository.getHabitsForContext(context1), containsInAnyOrder(habit1, habit2));
+        assertThat(repo.getHabitsForContext(context1), containsInAnyOrder(habit1, habit2));
     }
 }

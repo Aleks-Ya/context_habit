@@ -27,19 +27,19 @@ public class HabitRenewWorkerTest extends BaseAndroidTest {
         CronConverters cronConverters = new CronConverters();
         schedule.cron = cronConverters.fromString("* * * * *");
         schedule.name = "Every second";
-        repository.saveSchedule(schedule);
+        repo.saveSchedule(schedule);
 
         HabitEntity habit = createHabitNoId1();
         habit.scheduleId = schedule.id;
-        repository.saveHabit(habit);
+        repo.saveHabit(habit);
 
-        assertThat(repository.getAllHabitRenews(), empty());
+        assertThat(repo.getAllHabitRenews(), empty());
 
         OneTimeWorkRequest uploadWorkRequest = new OneTimeWorkRequest.Builder(HabitRenewWorker.class).build();
         Operation operation = workManager.enqueue(uploadWorkRequest);
         Operation.State state = operation.getResult().get();
         assertThat(state, Matchers.instanceOf(Operation.State.SUCCESS.class));
 
-        assertThat(repository.getAllHabitRenews(), hasSize(1));
+        assertThat(repo.getAllHabitRenews(), hasSize(1));
     }
 }

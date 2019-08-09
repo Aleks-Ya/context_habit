@@ -29,7 +29,7 @@ public class ContextHabitJoinDaoTest extends BaseAndroidTest {
         long contextId = contextDao.insert(context);
         context.id = contextId;
 
-        repository.saveSchedule(createScheduleNoIdDaily());
+        repo.saveSchedule(createScheduleNoIdDaily());
         HabitEntity habit = createHabitNoId1();
         long habitId = habitDao.insert(habit);
         habit.id = habitId;
@@ -47,7 +47,7 @@ public class ContextHabitJoinDaoTest extends BaseAndroidTest {
         long contextId = contextDao.insert(context);
         context.id = contextId;
 
-        repository.saveSchedule(createScheduleNoIdDaily());
+        repo.saveSchedule(createScheduleNoIdDaily());
         HabitEntity habit = createHabitNoId1();
         long habitId = habitDao.insert(habit);
         habit.id = habitId;
@@ -74,8 +74,8 @@ public class ContextHabitJoinDaoTest extends BaseAndroidTest {
         context1.id = contextId1;
         context2.id = contextId2;
         context3.id = contextId3;
-        repository.saveSchedule(createScheduleNoIdDaily());
-        repository.saveSchedule(createScheduleNoIdWeekly());
+        repo.saveSchedule(createScheduleNoIdDaily());
+        repo.saveSchedule(createScheduleNoIdWeekly());
         HabitEntity habit1 = createHabitNoId1();
         HabitEntity habit2 = createHabitNoId2();
         long habitId1 = habitDao.insert(habit1);
