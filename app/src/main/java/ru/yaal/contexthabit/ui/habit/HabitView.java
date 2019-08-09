@@ -16,31 +16,31 @@ public class HabitView extends ConstraintLayout {
     }
 
     public TextView getHabitNameTextView() {
-        return findViewById(R.id.habitNameTextView);
+        return findViewById(R.id.habit_name_text_view);
     }
 
     public Button getNegativeMinusButton() {
-        return findViewById(R.id.negativeMinusButton);
+        return findViewById(R.id.negative_minus_button);
     }
 
     public Button getNegativePlusButton() {
-        return findViewById(R.id.negativePlusButton);
+        return findViewById(R.id.negative_plus_button);
     }
 
     public TextView getNegativeValueTextView() {
-        return findViewById(R.id.negativeValueTextView);
+        return findViewById(R.id.negative_value_text_view);
     }
 
     public Button getPositiveMinusButton() {
-        return findViewById(R.id.positiveMinusButton);
+        return findViewById(R.id.positive_minus_button);
     }
 
     public Button getPositivePlusButton() {
-        return findViewById(R.id.positivePlusButton);
+        return findViewById(R.id.positive_plus_button);
     }
 
     public TextView getPositiveValueTextView() {
-        return findViewById(R.id.positiveValueTextView);
+        return findViewById(R.id.positive_value_text_view);
     }
 
     public TextView getNextRenewTextView() {

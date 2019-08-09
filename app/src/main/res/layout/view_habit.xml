@@ -2,7 +2,7 @@
 <ru.yaal.contexthabit.ui.habit.HabitView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/myView"
+    android:id="@+id/habit_view"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     tools:context="ru.yaal.contexthabit.ui.habit.HabitView">
@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/habitNameTextView"
+            android:id="@+id/habit_name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -33,7 +33,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/negativeMinusButton"
+                android:id="@+id/negative_minus_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -41,7 +41,7 @@
                 android:text="@string/habit_negative_minus_button_name" />
 
             <TextView
-                android:id="@+id/negativeValueTextView"
+                android:id="@+id/negative_value_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="20"
@@ -50,7 +50,7 @@
                 android:textSize="30sp" />
 
             <Button
-                android:id="@+id/negativePlusButton"
+                android:id="@+id/negative_plus_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -58,7 +58,7 @@
                 android:text="@string/habit_negative_plus_button_name" />
 
             <Button
-                android:id="@+id/positiveMinusButton"
+                android:id="@+id/positive_minus_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -66,7 +66,7 @@
                 android:text="@string/habit_positive_minus_button_name" />
 
             <TextView
-                android:id="@+id/positiveValueTextView"
+                android:id="@+id/positive_value_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="20"
@@ -75,7 +75,7 @@
                 android:textSize="30sp" />
 
             <Button
-                android:id="@+id/positivePlusButton"
+                android:id="@+id/positive_plus_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

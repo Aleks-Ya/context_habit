@@ -14,7 +14,7 @@ public class ContextView extends ConstraintLayout {
     }
 
     public Button getContextButton() {
-        return findViewById(R.id.contextButton);
+        return findViewById(R.id.context_button);
     }
 
 }
