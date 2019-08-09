@@ -21,6 +21,10 @@ public class EntityBuilder {
         return context;
     }
 
+    public static ContextEntity createContext(String contextName, long parentContextId) {
+        return createContext(null, contextName, parentContextId);
+    }
+
     public static HabitEntity createHabit(Long habitId, String habitName, Long scheduleId) {
         HabitEntity habit = new HabitEntity();
         habit.id = habitId;

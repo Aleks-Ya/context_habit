@@ -19,6 +19,9 @@ public interface ContextDao {
     @Query("SELECT * FROM ContextEntity WHERE parentContextId = 0")
     List<ContextEntity> getRootContexts();
 
+    @Query("SELECT * FROM ContextEntity WHERE parentContextId = :contextId")
+    List<ContextEntity> getNestedContexts(long contextId);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(ContextEntity context);
 

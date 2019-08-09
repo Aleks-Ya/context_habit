@@ -16,6 +16,8 @@ public interface Repository {
 
     List<ContextEntity> getRootContexts();
 
+    List<ContextEntity> getNestedContexts(ContextEntity parentContext);
+
     HabitEntity saveHabit(HabitEntity habitEntity);
 
     List<HabitEntity> getAllHabits();
