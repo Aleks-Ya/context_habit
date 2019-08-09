@@ -2,6 +2,7 @@ package ru.yaal.contexthabit.repo.room.context;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -9,9 +10,10 @@ import java.io.Serializable;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Entity
 @ToString
 @EqualsAndHashCode
+@Entity(foreignKeys = @ForeignKey(entity = ContextEntity.class,
+        parentColumns = "id", childColumns = "id"))
 public class ContextEntity implements Serializable {
     @PrimaryKey(autoGenerate = true)
     public Long id;
