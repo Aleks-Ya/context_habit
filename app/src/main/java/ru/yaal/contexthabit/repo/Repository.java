@@ -12,6 +12,10 @@ import ru.yaal.contexthabit.repo.room.habit.ScheduleEntity;
 public interface Repository {
     ContextEntity saveContext(ContextEntity contextEntity);
 
+    List<ContextEntity> getAllContexts();
+
+    List<ContextEntity> getRootContexts();
+
     HabitEntity saveHabit(HabitEntity habitEntity);
 
     List<HabitEntity> getAllHabits();
@@ -19,8 +23,6 @@ public interface Repository {
     List<HabitRenewEntity> getAllHabitRenews();
 
     void link(ContextEntity contextEntity, HabitEntity habitEntity);
-
-    List<ContextEntity> getAllContexts();
 
     List<HabitEntity> getHabitsForContext(ContextEntity contextEntity);
 

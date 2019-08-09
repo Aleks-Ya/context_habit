@@ -71,6 +71,11 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
+    public List<ContextEntity> getRootContexts() {
+        return contextDao.getRootContexts();
+    }
+
+    @Override
     public List<HabitEntity> getHabitsForContext(ContextEntity contextEntity) {
         return contextHabitJoinDao.getHabitsForContext(contextEntity.id);
     }
