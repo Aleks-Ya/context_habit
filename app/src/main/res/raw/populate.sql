@@ -101,5 +101,5 @@ insert into ContextEntity(id, name, parentContextId) values (32, 'кафе ух�
 insert into ContextHabitJoin(contextId, habitId) values (32,40);
 
 -- Context 13
-insert into ContextEntity(id, name, parentContextId) values (40, 'магазин', 4);
+insert into ContextEntity(id, name, parentContextId) values (40, 'делаю покупки', 4);
 insert into ContextHabitJoin(contextId, habitId) values (40,20);

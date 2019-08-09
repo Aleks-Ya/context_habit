@@ -14,6 +14,7 @@ import java.util.List;
 
 import ru.yaal.contexthabit.android.R;
 import ru.yaal.contexthabit.repo.room.context.ContextEntity;
+import ru.yaal.contexthabit.service.Singleton;
 import ru.yaal.contexthabit.ui.habit.HabitActivity;
 
 import static ru.yaal.contexthabit.ui.context.ContextActivity.CONTEXT_EXTRA_NAME;
@@ -72,9 +73,17 @@ public class ContextViewAdapter extends RecyclerView.Adapter<ContextViewAdapter.
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(), HabitActivity.class);
-            intent.putExtra(CONTEXT_EXTRA_NAME, model.contextEntity.getValue());
-            view.getContext().startActivity(intent);
+            ContextEntity context = model.contextEntity.getValue();
+            List<ContextEntity> nestedContexts = Singleton.repository.getNestedContexts(context);
+            if (nestedContexts.isEmpty()) {
+                Intent intent = new Intent(view.getContext(), HabitActivity.class);
+                intent.putExtra(CONTEXT_EXTRA_NAME, context);
+                view.getContext().startActivity(intent);
+            } else {
+                Intent intent = new Intent(view.getContext(), ContextActivity.class);
+                intent.putExtra(CONTEXT_EXTRA_NAME, context);
+                view.getContext().startActivity(intent);
+            }
         }
     }
 }

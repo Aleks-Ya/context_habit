@@ -6,7 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 import ru.yaal.contexthabit.android.R;
+import ru.yaal.contexthabit.repo.room.context.ContextEntity;
 
 import static ru.yaal.contexthabit.service.Singleton.repository;
 
@@ -22,7 +25,13 @@ public class ContextActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         contextRecyclerView.setLayoutManager(layoutManager);
 
-        RecyclerView.Adapter mAdapter = new ContextViewAdapter(repository.getAllContexts());
+        ContextEntity context = (ContextEntity) getIntent().getSerializableExtra(CONTEXT_EXTRA_NAME);
+        if (context == null) {
+            context = ContextEntity.emptyContext;
+        }
+
+        List<ContextEntity> contexts = repository.getNestedContexts(context);
+        RecyclerView.Adapter mAdapter = new ContextViewAdapter(contexts);
         contextRecyclerView.setAdapter(mAdapter);
     }
 }
