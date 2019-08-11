@@ -61,8 +61,8 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
-    public void link(ContextEntity contextEntity, HabitEntity habitEntity) {
-        contextHabitJoinDao.insert(createContextHabitJoin(contextEntity.id, habitEntity.id));
+    public void link(ContextEntity contextEntity, HabitEntity habitEntity, Long order) {
+        contextHabitJoinDao.insert(createContextHabitJoin(contextEntity.id, habitEntity.id, order));
     }
 
     @Override

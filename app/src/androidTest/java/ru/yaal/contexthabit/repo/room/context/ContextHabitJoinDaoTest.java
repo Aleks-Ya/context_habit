@@ -8,7 +8,6 @@ import ru.yaal.contexthabit.repo.room.BaseAndroidTest;
 import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
 
 import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -34,7 +33,7 @@ public class ContextHabitJoinDaoTest extends BaseAndroidTest {
         long habitId = habitDao.insert(habit);
         habit.id = habitId;
 
-        ContextHabitJoin join = createContextHabitJoin(contextId, habitId);
+        ContextHabitJoin join = createContextHabitJoin(contextId, habitId, 1L);
         contextHabitJoinDao.insert(join);
 
         assertThat(contextHabitJoinDao.getAll(), contains(join));
@@ -52,7 +51,7 @@ public class ContextHabitJoinDaoTest extends BaseAndroidTest {
         long habitId = habitDao.insert(habit);
         habit.id = habitId;
 
-        ContextHabitJoin join = createContextHabitJoin(contextId, habitId);
+        ContextHabitJoin join = createContextHabitJoin(contextId, habitId, 1L);
         contextHabitJoinDao.insert(join);
 
         assertThat(contextHabitJoinDao.getContextsForHabit(habitId), contains(context));
@@ -83,22 +82,22 @@ public class ContextHabitJoinDaoTest extends BaseAndroidTest {
         habit1.id = habitId1;
         habit2.id = habitId2;
 
-        ContextHabitJoin join1 = createContextHabitJoin(contextId1, habitId1);
-        ContextHabitJoin join2 = createContextHabitJoin(contextId1, habitId2);
-        ContextHabitJoin join3 = createContextHabitJoin(contextId2, habitId2);
+        ContextHabitJoin join1 = createContextHabitJoin(contextId1, habitId1, 2L);
+        ContextHabitJoin join2 = createContextHabitJoin(contextId1, habitId2, 1L);
+        ContextHabitJoin join3 = createContextHabitJoin(contextId2, habitId2, 1L);
         contextHabitJoinDao.insert(join1, join2, join3);
 
         List<ContextEntity> habit1Contexts = contextHabitJoinDao.getContextsForHabit(habitId1);
-        assertThat(habit1Contexts, containsInAnyOrder(context1));
+        assertThat(habit1Contexts, contains(context1));
 
         List<ContextEntity> habit2Contexts = contextHabitJoinDao.getContextsForHabit(habitId2);
-        assertThat(habit2Contexts, containsInAnyOrder(context1, context2));
+        assertThat(habit2Contexts, contains(context1, context2));
 
         List<HabitEntity> context1Habits = contextHabitJoinDao.getHabitsForContext(contextId1);
-        assertThat(context1Habits, containsInAnyOrder(habit1, habit2));
+        assertThat(context1Habits, contains(habit2, habit1));
 
         List<HabitEntity> context2Habits = contextHabitJoinDao.getHabitsForContext(contextId2);
-        assertThat(context2Habits, containsInAnyOrder(habit2));
+        assertThat(context2Habits, contains(habit2));
 
         List<HabitEntity> context3Habits = contextHabitJoinDao.getHabitsForContext(contextId3);
         assertThat(context3Habits, is(empty()));

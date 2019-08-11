@@ -6,6 +6,7 @@ import ru.yaal.contexthabit.repo.room.BaseAndroidTest;
 import ru.yaal.contexthabit.repo.room.context.ContextEntity;
 import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
 
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
@@ -36,7 +37,7 @@ public class RepositoryImplTest extends BaseAndroidTest {
         repo.saveSchedule(createScheduleNoIdWeekly());
         HabitEntity habit1 = repo.saveHabit(createHabitNoId1());
         HabitEntity habit2 = repo.saveHabit(createHabitNoId2());
-        assertThat(habitDao.getAll(), containsInAnyOrder(habit1, habit2));
+        assertThat(habitDao.getAll(), contains(habit1, habit2));
     }
 
     @Test
@@ -50,9 +51,9 @@ public class RepositoryImplTest extends BaseAndroidTest {
 
         assertThat(repo.getHabitsForContext(context1), is(empty()));
 
-        repo.link(context1, habit1);
-        repo.link(context1, habit2);
+        repo.link(context1, habit1, 1L);
+        repo.link(context1, habit2, 2L);
 
-        assertThat(repo.getHabitsForContext(context1), containsInAnyOrder(habit1, habit2));
+        assertThat(repo.getHabitsForContext(context1), contains(habit1, habit2));
     }
 }

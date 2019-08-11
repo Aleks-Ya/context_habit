@@ -27,7 +27,7 @@ public interface ContextHabitJoinDao {
     @Query("SELECT * FROM HabitEntity " +
             "INNER JOIN ContextHabitJoin " +
             "ON HabitEntity.id=ContextHabitJoin.habitId " +
-            "WHERE ContextHabitJoin.contextId=:contextId")
+            "WHERE ContextHabitJoin.contextId=:contextId ORDER BY ContextHabitJoin.`order`")
     List<HabitEntity> getHabitsForContext(final long contextId);
 
     @Delete

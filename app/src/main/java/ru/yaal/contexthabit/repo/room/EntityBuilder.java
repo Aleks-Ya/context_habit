@@ -33,10 +33,11 @@ public class EntityBuilder {
         return habit;
     }
 
-    public static ContextHabitJoin createContextHabitJoin(Long contextId, Long habitId) {
+    public static ContextHabitJoin createContextHabitJoin(Long contextId, Long habitId, Long order) {
         ContextHabitJoin join = new ContextHabitJoin();
         join.contextId = contextId;
         join.habitId = habitId;
+        join.order = order;
         return join;
     }
 

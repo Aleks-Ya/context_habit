@@ -21,5 +21,6 @@ import ru.yaal.contexthabit.repo.room.habit.HabitEntity;
 public class ContextHabitJoin {
     public long contextId;
     public long habitId;
+    public long order;
 }
 

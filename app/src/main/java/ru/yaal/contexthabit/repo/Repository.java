@@ -24,7 +24,7 @@ public interface Repository {
 
     List<HabitRenewEntity> getAllHabitRenews();
 
-    void link(ContextEntity contextEntity, HabitEntity habitEntity);
+    void link(ContextEntity contextEntity, HabitEntity habitEntity, Long order);
 
     List<HabitEntity> getHabitsForContext(ContextEntity contextEntity);
 
